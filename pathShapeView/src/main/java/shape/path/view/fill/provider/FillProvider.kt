@@ -1,7 +1,7 @@
 package shape.path.view
 
 import android.graphics.*
-import shape.path.view.point.convertor.PointConverter
+import shape.path.view.point.converter.PointConverter
 
 /**
  * Created by root on 1/10/18.

@@ -1,1 +1,1 @@
-include ':app', ':pathshapeview'
+include ':app', ':pathShapeView'

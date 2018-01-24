@@ -10,7 +10,7 @@ import shape.path.view.BodyFillProvider
 import shape.path.view.GradientProvider
 import shape.path.view.PathProvider
 import shape.path.view.PathShape
-import shape.path.view.point.convertor.PercentagePointConverter
+import shape.path.view.point.converter.PercentagePointConverter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,15 +30,14 @@ class MainActivity : AppCompatActivity() {
         list.add(PointF(0f, 1f))
         pathProvider.putLines(list, true, PathProvider.PathOperation.ADD)
         val gradient = GradientProvider()
-        gradient.addColor(Color.WHITE, 0.5f)
+        gradient.addColor(Color.WHITE)
                 .addColor(Color.BLACK)
                 .setAngle(45f)
-                .setType(GradientProvider.Type.SWEEP)
+                .setType(GradientProvider.Type.LINEAR)
         val body = BodyFillProvider()
         body.setGradient(gradient)
         body.setRoundedCorners(180f)
         val contour = ContourFillProvider()
-        //contour.setGradient(gradient)
         contour.setColor(Color.BLACK)
         contour.setRoundedCorners(180f)
         contour.setWidth(30f)

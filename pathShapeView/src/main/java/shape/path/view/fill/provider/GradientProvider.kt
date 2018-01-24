@@ -1,7 +1,7 @@
 package shape.path.view
 
 import android.graphics.*
-import shape.path.view.point.convertor.PointConverter
+import shape.path.view.point.converter.PointConverter
 
 /**
  * Created by root on 1/10/18.
@@ -12,7 +12,8 @@ class GradientProvider {
     private var angle: Float = 0f
     private var colorList: ArrayList<Int> = arrayListOf()
     private var percentageColorPositions: ArrayList<Float> = arrayListOf()
-    private var startPoint: PointF = PointF(Float.MIN_VALUE, Float.MIN_VALUE)
+    private var startPoint: PointF = PointF(0f, 0f)
+    private var isStartPointSet: Boolean = false
     private var endPoint: PointF = PointF(0f, 0f)
     internal var length: Float = 0f
 
@@ -40,6 +41,7 @@ class GradientProvider {
 
     fun setStartPoint(startPoint: PointF): GradientProvider {
         this.startPoint = startPoint
+        isStartPointSet = true
         return this
     }
 
@@ -59,7 +61,7 @@ class GradientProvider {
         val percentage: FloatArray? = if (percentageColorPositions.size < colorList.size) null else percentageColorPositions.toFloatArray()
         return when(type) {
             Type.LINEAR -> {
-                updateLinearValues(angle, length)
+                updateLinearValues(converter.screenWidth , converter.screenHeight)
                 LinearGradient(startPoint.x, startPoint.y, endPoint.x, endPoint.y, colorList.toIntArray(), percentage, Shader.TileMode.MIRROR)
             }
             Type.RADIAL -> {
@@ -74,55 +76,25 @@ class GradientProvider {
     }
 
     private fun updateRadialValues(width: Float, height: Float) {
-        if (startPoint.x == Float.MIN_VALUE) {
+        if (!isStartPointSet) {
             startPoint.x = width / 2
-        }
-        if (startPoint.y == Float.MIN_VALUE) {
             startPoint.y = height / 2
         }
         if (length == 0f) {
-            length = getLength(startPoint.x, startPoint.y, width, height)
+            length = Utils.getLength(startPoint.x, startPoint.y, width, height)
         }
     }
 
     private fun updateLinearValues(width: Float, height: Float) {
-        if (startPoint.x == Float.MIN_VALUE) {
-            startPoint.x = 0f
-        }
-        if (startPoint.y == Float.MIN_VALUE) {
-            startPoint.y = 0f
-        }
         if (length == 0f) {
-            val angleInRadians = Math.toRadians(angle.toDouble())
-            val x: Float
-            val y: Float
-            if (height > width) {
-                y = height
-                x = (height / Math.tan(angleInRadians)).toFloat()
-            }
-            else  {
-                x = width
-                y = (Math.tan(angleInRadians) * width).toFloat()
-            }
-            length = getLength(0f, 0f, x, y)
+            val p = Utils.getVectorEndPoint(angle, width, height)
+            length = Utils.getLength(0f, 0f, p.x, p.y)
         }
-        getLinearEndPoint(angle, length)
-    }
-
-    private fun getLinearEndPoint(angle: Float, length: Float) {
-        val angleInRadians = Math.toRadians(angle.toDouble())
-        val endX = Math.cos(angleInRadians) * length
-        val endY = Math.sin(angleInRadians) * length
-        endPoint.x = endX.toFloat()
-        endPoint.y = endY.toFloat()
-    }
-
-    private fun getLength(x1: Float, y1: Float, x2: Float, y2: Float): Float {
-        return Math.sqrt(((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)).toDouble()).toFloat()
+        endPoint = Utils.getVectorEndPoint(angle, length)
     }
 
     private fun convertAllParams(converter: PointConverter) {
-        if (startPoint.x != Float.MIN_VALUE && startPoint.y != Float.MIN_VALUE) {
+        if (isStartPointSet) {
             startPoint = converter.convertPoint(startPoint)
         }
     }

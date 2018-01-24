@@ -6,7 +6,7 @@ import android.graphics.Path
 import android.graphics.PointF
 import android.graphics.RectF
 import android.os.Build
-import shape.path.view.point.convertor.PointConverter
+import shape.path.view.point.converter.PointConverter
 
 /**
  * Created by root on 1/9/18.

@@ -2,8 +2,8 @@ package shape.path.view
 
 import android.graphics.*
 import co.test.path.pathtest.ContourFillProvider
-import shape.path.view.point.convertor.DefaultPointConverter
-import shape.path.view.point.convertor.PointConverter
+import shape.path.view.point.converter.DefaultPointConverter
+import shape.path.view.point.converter.PointConverter
 
 /**
  * Created by Gleb on 1/3/18.
@@ -37,9 +37,6 @@ class PathShape private constructor() {
     }
 
     internal fun build(screenWidth: Float, screenHeight: Float) {
-       /* if (body != null && contour != null) {
-            body!!.paint.strokeWidth = contour!!.paint.strokeWidth
-        }*/
         pointConverter.setScreenSize(screenWidth, screenHeight)
         contour?.let {
             it.build(pointConverter)

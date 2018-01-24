@@ -1,4 +1,4 @@
-package shape.path.view.point.convertor
+package shape.path.view.point.converter
 
 import android.graphics.Matrix
 import android.graphics.PointF

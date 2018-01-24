@@ -8,57 +8,38 @@ import android.graphics.PointF
 class Utils {
 
     companion object {
-        fun convertToBezier(points: ArrayList<PointF>, epsilon: Float): ArrayList<PointF> {
-            val n = points.size
-            if (n < 3) {
-                // Cannot create bezier with less than 3 points
-                return points
+
+        //get distance between 2 points
+        fun getLength(x1: Float, y1: Float, x2: Float, y2: Float): Float {
+            return Math.sqrt(((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)).toDouble()).toFloat()
+        }
+        /*
+            Get end point for vector by it angle and length;
+            By default the start point is (0;0)
+         */
+        fun getVectorEndPoint(angle: Float, length: Float): PointF {
+            val angleInRadians = Math.toRadians(angle.toDouble())
+            val endX = Math.round(Math.cos(angleInRadians) * length)
+            val endY = Math.round(Math.sin(angleInRadians) * length)
+            return PointF(endX.toFloat(), endY.toFloat())
+        }
+        /*
+            Get end point for vector by it angle and bounds size;
+            By default the start point is (0;0)
+         */
+        fun getVectorEndPoint(angle: Float, boundsWidth: Float, boundsHeight: Float): PointF {
+            val angleInRadians = Math.toRadians(angle.toDouble())
+            val x: Float
+            val y: Float
+            if (boundsHeight >= boundsWidth && (angleInRadians % Math.PI) != 0.0) {
+                y = boundsHeight
+                x = Math.round(boundsHeight / Math.tan(angleInRadians)).toFloat()
             }
-            val result = arrayOfNulls<PointF>(2 * (n - 2))
-            var paX: Float
-            var paY: Float
-            var pbX = points[0].x
-            var pbY = points[0].y
-            var pcX = points[1].x
-            var pcY = points[1].y
-            for (i in 0 until n - 2) {
-                paX = pbX
-                paY = pbY
-                pbX = pcX
-                pbY = pcY
-                pcX = points[i + 2].x
-                pcY = points[i + 2].y
-                val abX = pbX - paX
-                val abY = pbY - paY
-                var acX = pcX - paX
-                var acY = pcY - paY
-                val lac = Math.sqrt((acX * acX + acY * acY).toDouble()).toFloat()
-                acX /= lac
-                acY /= lac
-
-                var proj = abX * acX + abY * acY
-                proj = if (proj < 0) -proj else proj
-                var apX = proj * acX
-                var apY = proj * acY
-
-                val p1X = pbX - epsilon * apX
-                val p1Y = pbY - epsilon * apY
-                result[2 * i] = PointF(p1X, p1Y)
-
-                acX = -acX
-                acY = -acY
-                val cbX = pbX - pcX
-                val cbY = pbY - pcY
-                proj = cbX * acX + cbY * acY
-                proj = if (proj < 0) -proj else proj
-                apX = proj * acX
-                apY = proj * acY
-
-                val p2X = pbX - epsilon * apX
-                val p2Y = pbY - epsilon * apY
-                result[2 * i + 1] = PointF(p2X, p2Y)
+            else  {
+                x = boundsWidth
+                y = Math.round(Math.tan(angleInRadians) * boundsWidth).toFloat()
             }
-            return result.toMutableList() as ArrayList<PointF>
+            return PointF(x, y)
         }
     }
 
