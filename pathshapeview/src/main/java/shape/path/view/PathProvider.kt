@@ -12,8 +12,8 @@ import shape.path.view.point.converter.PointConverter
  * Created by root on 1/9/18.
  */
 class PathProvider {
-    val path: Path = Path()
-    var contourPath: Path? = null
+    internal val path: Path = Path()
+    internal var contourPath: Path? = null
 
     enum class PathOperation {
         ADD,
