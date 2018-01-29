@@ -48,7 +48,12 @@ class ShapeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        path.setPath(getPathShape())
+        val sm = ShapeManager()
+        val views = arrayListOf(path1, path2, path3, path4)
+        val shapes = sm.getShapes(Sample.SIMPLE)
+        for (i in 0 until shapes.size) {
+            views[i].setPath(shapes[i])
+        }
     }
 
     fun getPathShape(): PathShape {
