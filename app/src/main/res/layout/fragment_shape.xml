@@ -7,19 +7,13 @@
     android:layout_height="match_parent"
     tools:context="demo.shape.path.view.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/sample_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <shape.path.view.PathShapeView
+        android:id="@+id/path"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container"
-        >
-    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
