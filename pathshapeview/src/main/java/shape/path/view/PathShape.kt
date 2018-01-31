@@ -38,13 +38,15 @@ class PathShape private constructor() {
 
     internal fun build(screenWidth: Float, screenHeight: Float) {
         pointConverter.setScreenSize(screenWidth, screenHeight)
+        var strokeWidth = 0f
         contour?.let {
             it.build(pointConverter)
-            pathProvider?.build(pointConverter, it.paint.strokeWidth)
+            strokeWidth = it.paint.strokeWidth
         }
         body?.let {
             it.build(pointConverter)
         }
+        pathProvider?.build(pointConverter, strokeWidth)
     }
 
     internal fun draw(canvas: Canvas) {

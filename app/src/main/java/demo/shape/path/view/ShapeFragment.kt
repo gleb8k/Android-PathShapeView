@@ -21,7 +21,7 @@ import java.util.ArrayList
  */
 class ShapeFragment : Fragment() {
 
-    private var sample: Sample = Sample.SIMPLE
+    private var sample: Sample = Sample.SIMPLE_SHAPES
 
     companion object {
 
@@ -50,7 +50,7 @@ class ShapeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val sm = ShapeManager()
         val views = arrayListOf(path1, path2, path3, path4)
-        val shapes = sm.getShapes(Sample.SIMPLE)
+        val shapes = sm.getShapes(sample)
         for (i in 0 until shapes.size) {
             views[i].setPath(shapes[i])
         }

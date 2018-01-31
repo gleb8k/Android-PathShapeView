@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.view_item_sample.view.*
 class SampleItemHolder private constructor(val itemClickListener: OnItemClickListener, itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private var title: AppCompatTextView? = null
-    private var sample: Sample = Sample.SIMPLE
+    private var sample: Sample = Sample.SIMPLE_SHAPES
 
     companion object {
         fun newInstance(parent: ViewGroup, itemClickListener: OnItemClickListener): SampleItemHolder {

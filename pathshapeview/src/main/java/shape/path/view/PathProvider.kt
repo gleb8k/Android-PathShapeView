@@ -91,12 +91,18 @@ class PathProvider {
         }
     }
 
+    internal fun build(converter: PointConverter) {
+        this.build(converter, 0f)
+    }
+
     internal fun build(converter: PointConverter, contourWidth: Float) {
         val m = converter.getMatrix()
         if (!m.isIdentity) {
             path.transform(m)
         }
-        fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
+        if (contourWidth >= 0f) {
+            fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
+        }
     }
 
     private fun fitContourPath(screenWidth: Float, screenHeight: Float, contourWidth: Float) {

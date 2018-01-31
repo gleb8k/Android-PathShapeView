@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), SampleItemHolder.OnItemClickListener {
     override fun onItemClick(sample: Sample) {
         fragment = ShapeFragment.newInstance(sample)
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.container, fragment)
+        fragmentTransaction.add(R.id.container, fragment)
         fragmentTransaction.addToBackStack(ShapeFragment.javaClass.simpleName)
         fragmentTransaction.commit()
     }

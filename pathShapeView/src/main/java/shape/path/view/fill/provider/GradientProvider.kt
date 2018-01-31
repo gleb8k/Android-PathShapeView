@@ -50,9 +50,9 @@ class GradientProvider {
         return this
     }
 
-    fun addColor(color: Int, percentage: Float): GradientProvider {
+    fun addColor(color: Int, colorPosition: Float): GradientProvider {
         colorList.add(color)
-        percentageColorPositions.add(percentage)
+        percentageColorPositions.add(colorPosition)
         return this
     }
 
