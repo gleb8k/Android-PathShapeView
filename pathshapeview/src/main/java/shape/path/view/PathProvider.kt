@@ -20,7 +20,8 @@ class PathProvider {
         SUB,
         SUB_REVERSE,
         JOIN,
-        INTERSECT
+        INTERSECT,
+        XOR
     }
 
     fun putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation) {
@@ -81,6 +82,20 @@ class PathProvider {
         putPath(p, operation)
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    fun putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation) {
+        val p = Path()
+        val left = centerPoint.x - width / 2
+        val top = centerPoint.y - height / 2
+        val right = centerPoint.x + width / 2
+        val bottom = centerPoint.y + height / 2
+        val start = PointF(left, top)
+        val end = PointF(right, bottom)
+        val radii = floatArrayOf(cornerRadius,cornerRadius,cornerRadius,cornerRadius, 0f, 0f, 0f, 0f)
+        p.addRoundRect(start.x, start.y, end.x, end.y, cornerRadius * 1.5f, cornerRadius, Path.Direction.CCW)
+        putPath(p, operation)
+    }
+
     private fun putPath(p: Path, operation: PathOperation) {
         when (operation) {
             PathOperation.ADD -> path.addPath(p)
@@ -88,6 +103,7 @@ class PathProvider {
             PathOperation.SUB -> path.op(p, Path.Op.DIFFERENCE)
             PathOperation.SUB_REVERSE -> path.op(p, Path.Op.REVERSE_DIFFERENCE)
             PathOperation.JOIN -> path.op(p, Path.Op.UNION)
+            PathOperation.XOR -> path.op(p, Path.Op.XOR)
         }
     }
 
@@ -108,12 +124,13 @@ class PathProvider {
     private fun fitContourPath(screenWidth: Float, screenHeight: Float, contourWidth: Float) {
         if (contourWidth > 0) {
             contourPath = Path(path)
-            val d = contourWidth / 2 - 3f
+            val d = contourWidth / 2
             val r1 = RectF(0f, 0f, screenWidth, screenHeight)
             val r2 = RectF(d, d, screenWidth - d, screenHeight - d)
             val matrix = Matrix()
             matrix.setRectToRect(r1, r2, Matrix.ScaleToFit.FILL)
             contourPath?.transform(matrix)
+            path.transform(matrix)
         }
     }
 }
