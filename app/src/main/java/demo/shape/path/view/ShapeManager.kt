@@ -3,13 +3,11 @@ package demo.shape.path.view
 import android.graphics.Color
 import android.graphics.PointF
 import co.test.path.pathtest.ContourFillProvider
-import shape.path.view.BodyFillProvider
-import shape.path.view.GradientProvider
-import shape.path.view.PathProvider
-import shape.path.view.PathShape
+import shape.path.view.*
+import shape.path.view.mark.Mark
 import shape.path.view.point.converter.CoordinateConverter
 import shape.path.view.point.converter.PercentagePointConverter
-import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by Gleb on 1/29/18.
@@ -23,6 +21,7 @@ class ShapeManager {
             Sample.GRADIENT_SAMPLE -> return getGradientSamples()
             Sample.SHAPE_SET_SAMPLE -> return getSetOfShapeSamples()
             Sample.POINT_CONVERTER_SAMPLE -> return getPointConverterSamples()
+            Sample.MARKS_SAMPLE -> return getMarksSamples()
         }
     }
 
@@ -300,6 +299,91 @@ class ShapeManager {
                 .setPath(pathProvider)
                 .fillBody(body)
                 .fillContour(contour)
+                .setPointConverter(PercentagePointConverter())
+        )
+        return list
+    }
+
+    private fun getMarksSamples(): List<PathShape> {
+        var list = arrayListOf<PathShape>()
+        var points = ArrayList<PointF>()
+        points.add(PointF(0.1f, 0.9f))
+        points.add(PointF(0.5f, 0.1f))
+        points.add(PointF(0.9f, 0.9f))
+        //1st
+        var pathProvider = PathProvider()
+        pathProvider.putLines(points, true, PathProvider.PathOperation.ADD)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(20f)
+        var mark = Mark()
+        mark.setDrawable(R.drawable.mark)
+        mark.fitDrawableToSize(50f,50f)
+        mark.addPositions(points)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillContour(contour)
+                .addMark(mark)
+                .setPointConverter(PercentagePointConverter())
+        )
+        //2nd
+        points = ArrayList()
+        points.add(PointF(0.1f, 0.1f))
+        points.add(PointF(0.5f, 0.3f))
+        points.add(PointF(0.6f, 0.4f))
+        points.add(PointF(0.7f, 0.6f))
+        points.add(PointF(0.9f, 0.8f))
+
+        pathProvider = PathProvider()
+        pathProvider.putLines(points, false, PathProvider.PathOperation.ADD)
+        contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(20f)
+        mark = Mark()
+        mark.setDrawable(R.mipmap.ic_launcher)
+        mark.fitDrawableToSize(50f,50f)
+        var tc = TextConfigurator()
+        tc.setTextColor(Color.BLUE)
+        tc.setStyle(TextConfigurator.Style.BOLD, TextConfigurator.Style.UNDERLINE)
+        tc.setTextSize(20f)
+        tc.setTextOffset(PointF(0f, -30f))
+        mark.setTextConfigurator(tc)
+        points.forEach { mark.addPosition(it, it.toString()) }
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillContour(contour)
+                .addMark(mark)
+                .setPointConverter(PercentagePointConverter())
+        )
+        //3rd
+        points = ArrayList()
+        points.add(PointF(0.1f, 0.1f))
+        points.add(PointF(0.5f, 0.3f))
+        points.add(PointF(0.6f, 0.4f))
+        points.add(PointF(0.7f, 0.6f))
+        points.add(PointF(0.9f, 0.8f))
+        points.add(PointF(0.1f, 0.9f))
+        points.add(PointF(0.5f, 0.1f))
+        points.add(PointF(0.9f, 0.9f))
+        mark = Mark()
+        mark.setDrawable(R.mipmap.ic_launcher)
+        mark.fitDrawableToSize(50f,50f)
+        mark.addPositions(points.subList(0,5))
+        var mark2 = Mark()
+        mark2.setDrawable(R.drawable.mark)
+        mark2.fitDrawableToSize(50f,50f)
+        mark2.addPositions(points.subList(5,8))
+
+        pathProvider = PathProvider()
+        pathProvider.putLines(points, false, PathProvider.PathOperation.ADD)
+        contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(20f)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillContour(contour)
+                .addMark(mark)
+                .addMark(mark2)
                 .setPointConverter(PercentagePointConverter())
         )
         return list
