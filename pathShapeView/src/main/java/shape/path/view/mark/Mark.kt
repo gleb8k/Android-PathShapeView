@@ -1,10 +1,11 @@
-package shape.path.view
+package shape.path.view.mark
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.PointF
 import android.graphics.drawable.Drawable
 import android.support.v4.content.res.ResourcesCompat
+import shape.path.view.TextConfigurator
 import shape.path.view.point.converter.PointConverter
 
 /**
