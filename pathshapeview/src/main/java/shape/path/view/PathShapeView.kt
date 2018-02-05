@@ -24,7 +24,7 @@ class PathShapeView : View {
     fun setPath(pathShape: PathShape) {
         post {
             val p = getClearViewSize()
-            pathShape.build(p.x, p.y)
+            pathShape.build(context, p.x, p.y)
             this.pathShape = pathShape
             invalidate()
         }

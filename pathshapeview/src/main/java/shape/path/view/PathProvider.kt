@@ -116,13 +116,11 @@ class PathProvider {
         if (!m.isIdentity) {
             path.transform(m)
         }
-        if (contourWidth >= 0f) {
-            fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
-        }
+        fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
     }
 
     private fun fitContourPath(screenWidth: Float, screenHeight: Float, contourWidth: Float) {
-        if (contourWidth > 0) {
+        if (contourWidth >= 0f) {
             contourPath = Path(path)
             val d = contourWidth / 2
             val r1 = RectF(0f, 0f, screenWidth, screenHeight)
@@ -132,5 +130,9 @@ class PathProvider {
             contourPath?.transform(matrix)
             path.transform(matrix)
         }
+    }
+
+    internal fun hasContourPath(): Boolean {
+        return contourPath != null
     }
 }
