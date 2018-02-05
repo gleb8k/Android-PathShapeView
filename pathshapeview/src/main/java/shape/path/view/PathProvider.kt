@@ -91,7 +91,7 @@ class PathProvider {
         val bottom = centerPoint.y + height / 2
         val start = PointF(left, top)
         val end = PointF(right, bottom)
-        val radii = floatArrayOf(cornerRadius,cornerRadius,cornerRadius,cornerRadius, 0f, 0f, 0f, 0f)
+        //val radii = floatArrayOf(cornerRadius,cornerRadius,cornerRadius,cornerRadius, 0f, 0f, 0f, 0f)
         p.addRoundRect(start.x, start.y, end.x, end.y, cornerRadius * 1.5f, cornerRadius, Path.Direction.CCW)
         putPath(p, operation)
     }
