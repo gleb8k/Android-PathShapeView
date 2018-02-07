@@ -23,3 +23,38 @@ dependencies {
 	compile 'com.github.gleb8k:Android-PathShapeView:1.1.4'
 }
 ```
+## Usage
+
+* Sample for drawing shapes
+
+![shapes_small](https://user-images.githubusercontent.com/34940037/35919086-a19a2992-0c1c-11e8-8895-ec33c12d3621.jpg)
+
+Draw triangle with rounded corners:
+```kotlin
+	var list = arrayListOf<PathShape>()
+        var pathProvider = PathProvider()
+        var points = ArrayList<PointF>()
+        points.add(PointF(0.1f, 0.9f))
+        points.add(PointF(0.5f, 0.1f))
+        points.add(PointF(0.9f, 0.9f))
+        pathProvider.putLines(points, true, PathProvider.PathOperation.ADD)
+        var body = BodyFillProvider()
+        body.setColor(Color.GRAY)
+        body.setRoundedCorners(30f)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(10f)
+        contour.setRoundedCorners(30f)
+        var pathShape = PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter())
+```
+Draw rect
+
+...
+```kotlin
+        pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
+```
+...
