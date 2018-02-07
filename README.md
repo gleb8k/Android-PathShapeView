@@ -52,28 +52,28 @@ Just to simple add item use **ADD** operation.
 There are several items which you can create
 	- **putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)** - add lines by list of points,
 	      **isClosed** - allows to close the current contour.
-	- *putArc(centerPoint: PointF, width:Float, height:Float, startAngle: Float, sweepAngle: Float, 	operation:		PathOperation)* - add arc to the path as a new contour
-	- *putOval(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)* - add a closed oval contour
-	- *putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)* - add a closed circle contour
-	- *putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)* - add a closed rectangle contour
-	- *putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)* - add 		    a closed round-rectangle contour
+	- **putArc(centerPoint: PointF, width:Float, height:Float, startAngle: Float, sweepAngle: Float, 	operation:		PathOperation)** - add arc to the path as a new contour
+	- **putOval(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed oval contour
+	- **putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)** - add a closed circle contour
+	- **putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed rectangle 		contour
+	- **putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)** - 		   add a closed round-rectangle contour
 	
-* *BodyFillProvider* - class which allows to fill your graphic items
-	- *setColor(color: Int)* - set the fill color
-	- *setGradient(gradient: GradientProvider)* - set the fill gradient
-	     *gradient.setType(type: Type)* - gradient can be(*LINEAR*, *RADIAL* or *SWEEP*)
-	     *gradient.setAngle(angle: Float)* - set the angle of gradient direction
-	     *gradient.setLength(length: Float)* - set the length of gradient, by default it fills fit view size
-	     *gradient.setStartPoint(startPoint: PointF)* - set the start position of gradient
-	     *gradient.addColor(color: Int)* - add new color to gradient
-	     *gradient.addColor(color: Int, colorPosition: Float) - add new color to gradient with color position, 		     colorPosition ca be in [0..1]
-	- *setRoundedCorners(radius: Float)* - set all corners rounded with radius     
-* *ContourFillProvider* - class which allows to draw the contour of your graphic items. Has the same methods with the 	*BodyFillProvider* class and several specified methods:
-	- *setWidth(width: Float)* - set the width of contour
-	- *setIsDotRounded(isDotRounded: Boolean)* - if your contour is dashed it allows to round your dots
-	- *addDotParams(dotLength: Float, dotDistance: Float)* - set your contour is dashed and add dot params. You can add 	    params more than one time. Each new params will configure the next dot.
-* list of *Mark* items
-* PointConverter
+* **BodyFillProvider** - class which allows to fill your graphic items
+	- **setColor(color: Int)** - set the fill color
+	- **setGradient(gradient: GradientProvider)** - set the fill gradient
+	     **gradient.setType(type: Type)** - gradient can be(*LINEAR*, *RADIAL* or *SWEEP*)
+	     **gradient.setAngle(angle: Float)** - set the angle of gradient direction
+	     **gradient.setLength(length: Float)** - set the length of gradient, by default it fills fit view size
+	     **gradient.setStartPoint(startPoint: PointF)** - set the start position of gradient
+	     **gradient.addColor(color: Int)** - add new color to gradient
+	     **gradient.addColor(color: Int, colorPosition: Float)** - add new color to gradient with color position, 		     colorPosition ca be in [0..1]
+	- **setRoundedCorners(radius: Float)** - set all corners rounded with radius     
+* **ContourFillProvider** - class which allows to draw the contour of your graphic items. Has the same methods with the 	**BodyFillProvider** class and several specified methods:
+	- **setWidth(width: Float)** - set the width of contour
+	- **setIsDotRounded(isDotRounded: Boolean)** - if your contour is dashed it allows to round your dots
+	- **addDotParams(dotLength: Float, dotDistance: Float)** - set your contour is dashed and add dot params. You can add 	    params more than one time. Each new params will configure the next dot.
+* list of **Mark** items
+* **PointConverter**
 
 ## Samples
 
