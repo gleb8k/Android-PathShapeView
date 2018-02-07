@@ -25,7 +25,7 @@ dependencies {
 ```
 ## Usage
 
-The main class to show your graphic items is *PathShapeView* 
+The main class to show your graphic items is **PathShapeView** 
 You can create it and attach to your root view:
 ```kotlin
 	val pathShapeView = PathShapeView(context: Context)
@@ -47,17 +47,11 @@ Use *PathShape* class to config graphic items
 ```
 *PathShape* contains of:
 
-* *PathProvider* - is the main class which allow to create different graphic items. Each item can be added with the logical operation (*PathOperation*)
-	- ADD,
-        - SUB,
-        - SUB_REVERSE,
-        - JOIN,
-        - INTERSECT,
-        - XOR
-Just to simple add item use *ADD* operation:
+* **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)
+Just to simple add item use **ADD** operation.
 There are several items which you can create
-	- *putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)* - add lines by list of points,
-	      *isClosed* - allows to close the current contour.
+	- **putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)** - add lines by list of points,
+	      **isClosed** - allows to close the current contour.
 	- *putArc(centerPoint: PointF, width:Float, height:Float, startAngle: Float, sweepAngle: Float, 	operation:		PathOperation)* - add arc to the path as a new contour
 	- *putOval(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)* - add a closed oval contour
 	- *putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)* - add a closed circle contour
