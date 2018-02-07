@@ -138,3 +138,25 @@ Draw arc
         pathProvider.putArc(PointF(0.5f, 0.5f), 0.9f, 0.7f, 30f, 230f, PathProvider.PathOperation.ADD)
 	...
 ```
+
+* Dashed contour sample
+
+![contour_dots](https://user-images.githubusercontent.com/34940037/35941200-274fb1b4-0c5a-11e8-808e-b7fd0a37e05a.jpg)
+```kotlin
+	val pathProvider = PathProvider()
+        pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
+        val contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(20f)
+        contour.addDotParams(20f, 40f)
+        contour.addDotParams(40f, 40f)
+        contour.addDotParams(40f, 40f)
+        contour.setIsDotRounded(true)
+        val pathShape = PathShape.create()
+                .setPath(pathProvider)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter())
+```
+
+* Shape with gradient sample
+
