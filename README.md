@@ -39,11 +39,36 @@ Or inflate from xml:
             android:layout_height="match_parent">
 	    ...
 ```
-Use *PathShape* to config graphic items 
+Use *PathShape* class to config graphic items 
 ```kotlin
 	val pathShape = PathShape.create()
+	pathShapeView.setPath(pathShape)
 	...
 ```
+*PathShape* contains of:
+
+* *PathProvider* - is the main class which allow to create different graphic items. Each item can be added with the logical operation (*PathOperation)
+	- ADD,
+        - SUB,
+        - SUB_REVERSE,
+        - JOIN,
+        - INTERSECT,
+        - XOR
+Just to simple add item use *ADD* operation:
+There are several items which you can create
+	- *putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)* - add lines by list of points,
+	      *isClosed* - allows to close the current contour.
+	- *putArc(centerPoint: PointF, width:Float, height:Float, startAngle: Float, sweepAngle: Float, 	operation:		PathOperation)* - add arc to the path as a new contour
+	- *putOval(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)* - add a closed oval contour
+	- *putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)* - add a closed circle contour
+	- *putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)* - add a closed rectangle contour
+	- *putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)* - add 		    a closed round-rectangle contour
+	
+* *BodyFillProvider*
+* *ContourFillProvider*
+* list of *Mark* items
+* PointConverter
+
 ## Samples
 
 * Sample for drawing shapes
