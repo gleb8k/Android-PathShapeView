@@ -61,8 +61,8 @@ There are several items which you can create
 * **BodyFillProvider** - class which allows to fill your graphic items
 	- **setColor(color: Int)** - set the fill color
 	- **setGradient(gradient: GradientProvider)** - set the fill gradient
-	     > **gradient.setType(type: Type)** - gradient can be(*LINEAR*, *RADIAL* or *SWEEP*)
-	     > **gradient.setAngle(angle: Float)** - set the angle of gradient direction
+	     **gradient.setType(type: Type)** - gradient can be(*LINEAR*, *RADIAL* or *SWEEP*)__
+	     **gradient.setAngle(angle: Float)** - set the angle of gradient direction__
 	     > **gradient.setLength(length: Float)** - set the length of gradient, by default it fills fit view size
 	     > **gradient.setStartPoint(startPoint: PointF)** - set the start position of gradient
 	     > **gradient.addColor(color: Int)** - add new color to gradient
