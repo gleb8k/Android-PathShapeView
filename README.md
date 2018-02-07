@@ -25,6 +25,27 @@ dependencies {
 ```
 ## Usage
 
+The main class to show your graphic items is *PathShapeView* 
+You can create it and attach to your root view:
+```kotlin
+	val pathShapeView = PathShapeView(context: Context)
+	...
+```
+Or inflate from xml:
+```xml
+	<shape.path.view.PathShapeView
+            android:id="@+id/path"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+	    ...
+```
+Use *PathShape* to config graphic items 
+```kotlin
+	val pathShape = PathShape.create()
+	...
+```
+## Samples
+
 * Sample for drawing shapes
 
 ![shapes_small](https://user-images.githubusercontent.com/34940037/35919086-a19a2992-0c1c-11e8-8895-ec33c12d3621.jpg)
