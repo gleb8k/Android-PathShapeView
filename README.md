@@ -187,3 +187,44 @@ Draw arc
                 .fillContour(contour)
                 .setPointConverter(PercentagePointConverter())
 ```
+
+* Logical operations with shapes
+
+![set-shapes](https://user-images.githubusercontent.com/34940037/35942689-226e004c-0c5f-11e8-8561-db5d1f64098b.jpg)
+```kotlin
+	var pathProvider = PathProvider()
+        pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 0.6f, 1f, PathProvider.PathOperation.JOIN)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 1f, 0.6f, PathProvider.PathOperation.JOIN)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(20f)
+        var body = BodyFillProvider()
+        body.setColor(Color.LTGRAY)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter()))
+```
+```kotlin
+	...
+	pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 0.6f, 1f, PathProvider.PathOperation.INTERSECT)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 1f, 0.6f, PathProvider.PathOperation.INTERSECT)
+	...
+```
+```kotlin
+	...
+	pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 0.6f, 1f, PathProvider.PathOperation.SUB)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 1f, 0.6f, PathProvider.PathOperation.SUB)
+	...
+```
+```kotlin
+	...
+	pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 0.6f, 0.9f, PathProvider.PathOperation.SUB_REVERSE)
+        pathProvider.putOval(PointF(0.5f, 0.5f), 0.9f, 0.6f, PathProvider.PathOperation.SUB_REVERSE)
+	...
+```
