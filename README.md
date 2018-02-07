@@ -49,7 +49,7 @@ Use *PathShape* class to config graphic items
 
 * **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)
 Just to simple add item use **ADD** operation.
-There are several items which you can create
+There are several items which you can create:
 	- **putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)** - add lines by list of points,
 	      **isClosed** - allows to close the current contour.
 	- **putArc(centerPoint: PointF, width:Float, height:Float, startAngle: Float, sweepAngle: Float, 	operation:		PathOperation)** - add arc to the path as a new contour
@@ -58,9 +58,9 @@ There are several items which you can create
 	- **putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed rectangle 		contour
 	- **putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)** - 		   add a closed round-rectangle contour
 	
-* **BodyFillProvider** - class which allows to fill your graphic items
+* **BodyFillProvider** - class which allows to fill your graphic items. There are methods of **BodyFillProvider**:
 	- **setColor(color: Int)** - set the fill color
-	- **setGradient(gradient: GradientProvider)** - set the fill gradient  
+	- **setGradient(gradient: GradientProvider)** - set the fill gradient. There are methods of **GradientProvider**:  
 	     - **gradient.setType(type: Type)** - gradient can be(*LINEAR*, *RADIAL* or *SWEEP*)  
 	     - **gradient.setAngle(angle: Float)** - set the angle of gradient direction  
 	     - **gradient.setLength(length: Float)** - set the length of gradient, by default it fills fit view size  
@@ -72,8 +72,24 @@ There are several items which you can create
 	- **setWidth(width: Float)** - set the width of contour
 	- **setIsDotRounded(isDotRounded: Boolean)** - if your contour is dashed it allows to round your dots
 	- **addDotParams(dotLength: Float, dotDistance: Float)** - set your contour is dashed and add dot params. You can add 	    	params more than one time. Each new params will configure the next dot.
-* list of **Mark** items
-* **PointConverter**
+* list of **Mark** items - marks which show labels and icons on the graphic items. Each mark can be configured by the 	following methods:
+	- **addPosition(point: PointF)** - add new position to current mark
+	- **addPosition(point: PointF, label: String?)** - add new position with label to current mark
+	- **addPositions(points: List<PointF>)** - add list of positions to current mark
+	- **addPositions(points: List<PointF>, labels: List<String>)** - add list of positions and list of labels to current 		mark
+	- **setDrawable(resId: Int)** - set image resource to current mark
+	- **setDrawable(drawable: Drawable) - set image drawable to current mark
+	- **fitDrawableToSize(width: Float, height: Float)** - scale mark icon to current size
+	- **setTextConfigurator(configurator: TextConfigurator)** - set text configuration to mark. It does effect when mark 		contains text labels.
+* **TextConfigurator** - main class to configure text params. There are following methods:
+	- **setStyle(vararg style: Style)** - set text style(BOLD, UNDERLINE, STRIKE, SUB_PIXEL, ITALIC)
+	- **setTextSize(size: Float)** - set text size
+	- **setTextColor(color: Int)** - set text color
+	- **setTypeface(typeface: Typeface)** set text font
+	- **setTextOffset(offset: PointF)** set text offset position
+* **PointConverter** - main class which allows convert positions of graphic items. There are 3 types of **PointConverter**:
+	- **DefaultPointConverter** - doesn't convert any positions
+	- **PercentagePointConverter** - convert all points with percantage to view size. Positions can be in [0..1]
 
 ## Samples
 
