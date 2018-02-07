@@ -89,7 +89,8 @@ There are several items which you can create:
 	- **setTextOffset(offset: PointF)** set text offset position
 * **PointConverter** - main class which allows convert positions of graphic items. There are 3 types of **PointConverter**:
 	- **DefaultPointConverter** - doesn't convert any positions
-	- **PercentagePointConverter** - convert all points with percantage to view size. Positions can be in [0..1]
+	- **PercentagePointConverter** - convert all points with percantage aspect ratio to view size. Positions can be in 		[0..1]. If position out of range converted position will be out of view size.
+	- **CoordinateConverter** - convert all positions from old view bounds(width and height) with aspect ratio to current 		   view size 
 
 ## Samples
 
