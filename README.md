@@ -18,7 +18,7 @@ allprojects {
 ```
 Then add the dependencies that you need in your project.
 
-```
+```gradle
 dependencies {
 	compile 'com.github.gleb8k:Android-PathShapeView:1.1.4'
 }
