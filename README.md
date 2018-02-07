@@ -141,7 +141,7 @@ Draw arc
 
 * Dashed contour sample
 
-![contour_dots](https://user-images.githubusercontent.com/34940037/35941200-274fb1b4-0c5a-11e8-808e-b7fd0a37e05a.jpg)
+![contour_dots](https://user-images.githubusercontent.com/34940037/35941915-9962edb4-0c5c-11e8-9176-04f6e1ff5195.jpg)
 ```kotlin
 	val pathProvider = PathProvider()
         pathProvider.putRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, PathProvider.PathOperation.ADD)
@@ -160,3 +160,30 @@ Draw arc
 
 * Shape with gradient sample
 
+![gradients](https://user-images.githubusercontent.com/34940037/35941978-cf31331a-0c5c-11e8-8a1a-f566996b7e42.jpg)
+```kotlin
+	var pathProvider = PathProvider()
+        pathProvider.putRoundRect(PointF(0.5f, 0.5f), 0.9f, 0.9f, 0.2f, PathProvider.PathOperation.ADD)
+        var gradient = GradientProvider()
+        gradient.addColor(Color.BLUE)
+                .addColor(Color.WHITE)
+                .addColor(Color.BLUE)
+                .setType(GradientProvider.Type.SWEEP)
+        var body = BodyFillProvider()
+        body.setGradient(gradient)
+        gradient = GradientProvider()
+        gradient.addColor(Color.BLACK, 0f)
+                .addColor(Color.RED,0.1f)
+                .addColor(Color.WHITE,0.5f)
+                .addColor(Color.RED,0.9f)
+                .addColor(Color.BLACK,1f)
+                .setType(GradientProvider.Type.LINEAR)
+        var contour = ContourFillProvider()
+        contour.setGradient(gradient)
+        contour.setWidth(100f)
+        var pathShape = PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter())
+```
