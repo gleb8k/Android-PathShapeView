@@ -228,3 +228,59 @@ Draw arc
         pathProvider.putOval(PointF(0.5f, 0.5f), 0.9f, 0.6f, PathProvider.PathOperation.SUB_REVERSE)
 	...
 ```
+
+* Sample with marks
+
+![marks](https://user-images.githubusercontent.com/34940037/36018528-ba0222b4-0d84-11e8-8b8c-ae08bc655a61.jpg)
+```kotlin
+	var points = ArrayList()
+        points.add(PointF(0.1f, 0.1f))
+        points.add(PointF(0.5f, 0.3f))
+        points.add(PointF(0.6f, 0.4f))
+        points.add(PointF(0.7f, 0.6f))
+        points.add(PointF(0.9f, 0.8f))
+        var pathProvider = PathProvider()
+        pathProvider.putLines(points, false, PathProvider.PathOperation.ADD)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(20f)
+        var mark = Mark()
+        mark.setDrawable(R.mipmap.ic_launcher)
+        mark.fitDrawableToSize(50f,50f)
+        var tc = TextConfigurator()
+        tc.setTextColor(Color.BLUE)
+        tc.setStyle(TextConfigurator.Style.BOLD, TextConfigurator.Style.UNDERLINE)
+        tc.setTextSize(20f)
+        tc.setTextOffset(PointF(0f, -30f))
+        mark.setTextConfigurator(tc)
+        points.forEach { mark.addPosition(it, it.toString()) }
+        var pathShape = PathShape.create()
+                .setPath(pathProvider)
+                .fillContour(contour)
+                .addMark(mark)
+                .setPointConverter(PercentagePointConverter()
+```
+
+# License
+
+MIT License
+
+Copyright (c) 2018 gleb8k
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
