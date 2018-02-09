@@ -66,7 +66,7 @@ There are several items which you can create:
 	     - **gradient.setLength(length: Float)** - set the length of gradient, by default it fills fit view size  
 	     - **gradient.setStartPoint(startPoint: PointF)** - set the start position of gradient  
 	     - **gradient.addColor(color: Int)** - add new color to gradient  
-	     - **gradient.addColor(color: Int, colorPosition: Float)** - add new color to gradient with color position, 		  colorPosition ca be in [0..1]  
+	     - **gradient.addColor(color: Int, colorPosition: Float)** - add new color to gradient with color position, 		  colorPosition can be in [0..1]  
 	- **setRoundedCorners(radius: Float)** - set all corners rounded with radius     
 * **ContourFillProvider** - class which allows to draw the contour of your graphic items. Has the same methods with the 	**BodyFillProvider** class and several specified methods:
 	- **setWidth(width: Float)** - set the width of contour
@@ -78,7 +78,7 @@ There are several items which you can create:
 	- **addPositions(points: List<PointF>)** - add list of positions to current mark
 	- **addPositions(points: List<PointF>, labels: List<String>)** - add list of positions and list of labels to current 		mark
 	- **setDrawable(resId: Int)** - set image resource to current mark
-	- **setDrawable(drawable: Drawable) - set image drawable to current mark
+	- **setDrawable(drawable: Drawable)** - set image drawable to current mark
 	- **fitDrawableToSize(width: Float, height: Float)** - scale mark icon to current size
 	- **setTextConfigurator(configurator: TextConfigurator)** - set text configuration to mark. It does effect when mark 		contains text labels.
 * **TextConfigurator** - main class to configure text params. There are following methods:
@@ -89,7 +89,7 @@ There are several items which you can create:
 	- **setTextOffset(offset: PointF)** set text offset position
 * **PointConverter** - main class which allows convert positions of graphic items. There are 3 types of **PointConverter**:
 	- **DefaultPointConverter** - doesn't convert any positions
-	- **PercentagePointConverter** - convert all points with percantage aspect ratio to view size. Positions can be in 		[0..1]. If position out of range converted position will be out of view size.
+	- **PercentagePointConverter** - convert all points with percantage aspect ratio to view size. Positions can be in 		[0..1]. If position is out of range converted position will be out of view size.
 	- **CoordinateConverter** - convert all positions from old view bounds(width and height) with aspect ratio to current 		   view size 
 
 ## Samples
