@@ -1,13 +1,14 @@
 package shape.path.view
 
 import android.graphics.*
+import android.text.TextPaint
 import shape.path.view.point.converter.PointConverter
 
 /**
  * Created by root on 1/25/18.
  */
 class TextConfigurator {
-    internal val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    internal val paint: TextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
     internal var textOffset: PointF = PointF(0f, 0f)
 
     enum class Style {
@@ -57,15 +58,26 @@ class TextConfigurator {
     }
 
     internal fun build(pointConverter: PointConverter) {
-        //textOffset = pointConverter.convertPoint(textOffset)
+
     }
 
-    internal fun getPath(text: String, position: PointF): Path {
-        val p = Path()
-        val x = position.x + textOffset.x
-        val y = position.y + textOffset.y
-        paint.getTextPath(text, 0, text.length - 1, x, y, p)
-        return p
+    internal fun getPath(text: String, position: PointF, textWidth: Float, textHeight: Float): Path {
+        val path = Path()
+        if (text.isNotEmpty()) {
+            val x = position.x
+            val y = position.y
+            paint.getTextPath(text, 0, text.length, 0f, 0f, path)
+            val bounds = Rect()
+            paint.getTextBounds(text, 0, text.length, bounds)
+            val currentW = Math.abs(bounds.right - bounds.left).toFloat()
+            val currentH = Math.abs(bounds.top - bounds.bottom).toFloat()
+            val currentBounds = RectF(0f, 0f, currentW, currentH)
+            val matrix = Matrix()
+            val newBounds = RectF(x, y, textWidth + x, textHeight + y)
+            matrix.setRectToRect(currentBounds, newBounds, Matrix.ScaleToFit.CENTER)
+            path.transform(matrix)
+        }
+        return path
     }
 
 }

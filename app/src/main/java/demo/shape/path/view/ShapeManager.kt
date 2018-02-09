@@ -22,6 +22,7 @@ class ShapeManager {
             Sample.SHAPE_SET_SAMPLE -> return getSetOfShapeSamples()
             Sample.POINT_CONVERTER_SAMPLE -> return getPointConverterSamples()
             Sample.MARKS_SAMPLE -> return getMarksSamples()
+            Sample.TEXT_SAMPLE -> return getTextPathSamples()
         }
     }
 
@@ -386,6 +387,73 @@ class ShapeManager {
                 .addMark(mark2)
                 .setPointConverter(PercentagePointConverter())
         )
+        return list
+    }
+
+    private fun getTextPathSamples(): List<PathShape> {
+        var list = arrayListOf<PathShape>()
+
+        //1st
+        var pathProvider = PathProvider()
+        var tc = TextConfigurator()
+        tc.setStyle(TextConfigurator.Style.BOLD, TextConfigurator.Style.ITALIC)
+        //tc.setTextSize(200f)
+        pathProvider.putText(PointF(0.5f, 0.5f), 0.5f, 0.2f,"Hello!", tc, PathProvider.PathOperation.ADD)
+        var body = BodyFillProvider()
+        body.setColor(Color.LTGRAY)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(5f)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter()))
+        //2nd
+        pathProvider = PathProvider()
+        tc = TextConfigurator()
+        tc.setStyle(TextConfigurator.Style.UNDERLINE, TextConfigurator.Style.SUB_PIXEL)
+        tc.setTextSize(50f)
+        pathProvider.putText(PointF(0.5f, 0.5f), 0.8f, 0.5f,"Hello!", tc, PathProvider.PathOperation.ADD)
+        var gradient = GradientProvider()
+        gradient.setLength(50f)
+        gradient.addColor(Color.BLUE)
+                .addColor(Color.WHITE)
+                .addColor(Color.BLUE)
+                .setType(GradientProvider.Type.RADIAL)
+        body = BodyFillProvider()
+        body.setGradient(gradient)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .setPointConverter(PercentagePointConverter())
+        )
+        //3rd
+        pathProvider = PathProvider()
+        tc = TextConfigurator()
+        tc.setStyle(TextConfigurator.Style.BOLD, TextConfigurator.Style.SUB_PIXEL, TextConfigurator.Style.STRIKE)
+        tc.setTextSize(50f)
+        pathProvider.putText(PointF(0.5f, 0.5f), 0.8f, 0.5f,"Hello!", tc, PathProvider.PathOperation.ADD)
+        gradient = GradientProvider()
+        gradient.setLength(50f)
+        gradient.addColor(Color.RED)
+                .addColor(Color.WHITE)
+                .setType(GradientProvider.Type.LINEAR)
+        body = BodyFillProvider()
+        body.setGradient(gradient)
+        body.setRoundedCorners(30f)
+        contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(10f)
+        contour.addDotParams(15f, 15f)
+        contour.setIsDotRounded(true)
+        contour.setRoundedCorners(30f)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter()))
+
         return list
     }
 }

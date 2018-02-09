@@ -22,23 +22,15 @@ class PathShapeView : View {
     private var pathShape: PathShape = PathShape.create()
 
     fun setPath(pathShape: PathShape) {
-        post {
-            val p = getClearViewSize()
-            pathShape.build(context, p.x, p.y)
-            this.pathShape = pathShape
-            invalidate()
-        }
+        this.pathShape = pathShape
+        updateView()
     }
 
-    private fun getClearViewSize(): PointF {
-        var w = width //- (paddingLeft + paddingRight)
-        var h = height //- (paddingTop + paddingBottom)
-        /*if (layoutParams is ViewGroup.MarginLayoutParams) {
-            val p = layoutParams as ViewGroup.MarginLayoutParams
-            w -= (p.leftMargin + p.rightMargin)
-            h -= (p.topMargin + p.bottomMargin)
-        }*/
-        return PointF(w.toFloat(), h.toFloat())
+    fun updateView() {
+        post {
+            pathShape.build(context, width.toFloat(), height.toFloat())
+            invalidate()
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {

@@ -65,6 +65,7 @@ class PathShape private constructor() {
             if (contour != null && pathProvider!!.hasContourPath()) {
                 canvas.drawPath(pathProvider!!.contourPath, contour!!.paint)
             }
+            //canvas.dr
         }
         marks.forEach { it.draw(canvas) }
     }

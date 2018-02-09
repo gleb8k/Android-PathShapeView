@@ -8,4 +8,5 @@
     <string name="sample_shape_set">Shape\'s set sample</string>
     <string name="sample_point_converter">Point converter sample</string>
     <string name="sample_marks">Marks sample</string>
+    <string name="sample_text">Text path sample</string>
 </resources>

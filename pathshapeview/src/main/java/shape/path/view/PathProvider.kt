@@ -70,6 +70,11 @@ class PathProvider {
         putPath(p, operation)
     }
 
+    fun putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, operation: PathOperation) {
+        val p = textConfigurator.getPath(text, centerPoint, width, height)
+        putPath(p, operation)
+    }
+
     fun putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation) {
         val p = Path()
         val left = centerPoint.x - width / 2
@@ -91,7 +96,7 @@ class PathProvider {
         val bottom = centerPoint.y + height / 2
         val start = PointF(left, top)
         val end = PointF(right, bottom)
-        val radii = floatArrayOf(cornerRadius,cornerRadius,cornerRadius,cornerRadius, 0f, 0f, 0f, 0f)
+        //val radii = floatArrayOf(cornerRadius,cornerRadius,cornerRadius,cornerRadius, 0f, 0f, 0f, 0f)
         p.addRoundRect(start.x, start.y, end.x, end.y, cornerRadius * 1.5f, cornerRadius, Path.Direction.CCW)
         putPath(p, operation)
     }
