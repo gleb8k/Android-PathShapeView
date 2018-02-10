@@ -57,6 +57,8 @@ There are several items which you can create:
 	- **putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)** - add a closed circle contour
 	- **putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed rectangle 		contour
 	- **putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)** - 		   add a closed round-rectangle contour
+	- **putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, 	       operation: PathOperation)** - add text as closed contour
+
 	
 * **BodyFillProvider** - class which allows to fill your graphic items. There are methods of **BodyFillProvider**:
 	- **setColor(color: Int)** - set the fill color
