@@ -261,6 +261,25 @@ Draw arc
                 .setPointConverter(PercentagePointConverter()
 ```
 
+* Text sample
+
+![text_sample](https://user-images.githubusercontent.com/34940037/36065565-5a22d7d6-0ea5-11e8-90df-38e7922ff974.jpg)
+```kotlin
+ 	var pathProvider = PathProvider()
+        var tc = TextConfigurator()
+        tc.setStyle(TextConfigurator.Style.BOLD, TextConfigurator.Style.ITALIC)
+        pathProvider.putText(PointF(0.5f, 0.5f), 0.5f, 0.2f,"Hello!", tc, PathProvider.PathOperation.ADD)
+        var body = BodyFillProvider()
+        body.setColor(Color.LTGRAY)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLACK)
+        contour.setWidth(5f)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter()))
+```
 # License
 
    Copyright (c) 2018 gleb8k
