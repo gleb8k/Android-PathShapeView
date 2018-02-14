@@ -295,7 +295,7 @@ Draw arc
 
 * Sample with effects
 
-![effects](https://user-images.githubusercontent.com/34940037/36228997-7dbb8cec-11de-11e8-8488-17f98be755fd.jpg)
+![effects](https://user-images.githubusercontent.com/34940037/36228997-7dbb8cec-11de-11e8-8488-17f98be755fd.jpg)  
 Glow effect
 ```kotlin
 	var list = arrayListOf<PathShape>()
