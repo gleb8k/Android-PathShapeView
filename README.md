@@ -292,6 +292,44 @@ Draw arc
                 .fillContour(contour)
                 .setPointConverter(PercentagePointConverter()))
 ```
+
+* Sample with effects
+
+![effects](https://user-images.githubusercontent.com/34940037/36228997-7dbb8cec-11de-11e8-8488-17f98be755fd.jpg)
+Glow effect
+```kotlin
+	var list = arrayListOf<PathShape>()
+        var pathProvider = PathProvider()
+        var points = ArrayList<PointF>()
+        points.add(PointF(0.1f, 0.9f))
+        points.add(PointF(0.5f, 0.1f))
+        points.add(PointF(0.9f, 0.9f))
+        pathProvider.putLines(points, true, PathProvider.PathOperation.ADD)
+        var body = BodyFillProvider()
+        body.setTexture(R.drawable.bridge)
+        body.fitTextureToSize(1f, 1f, true)
+        body.setFillType(FillProvider.FillType.CLAMP)
+        body.setRoundedCorners(30f)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLUE)
+        contour.setWidth(10f)
+        contour.setRoundedCorners(30f)
+        contour.setGlowEffect(30f, FillProvider.GlowType.SOLID)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter()))
+```
+Emboss effect
+```kotlin
+	body.setEmbossEffect(45f, FillProvider.EmbossType.NORMAL)
+```
+Shadow
+```kotlin
+	contour.setShadow(15f, 10f, 10f, Color.BLACK)
+```
+
 # License
 
    Copyright (c) 2018 gleb8k
