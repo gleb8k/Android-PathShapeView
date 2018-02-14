@@ -1,4 +1,4 @@
-package shape.path.view
+package shape.path.view.utils
 
 import android.graphics.PointF
 

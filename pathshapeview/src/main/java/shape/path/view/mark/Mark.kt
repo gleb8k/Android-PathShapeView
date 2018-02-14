@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.PointF
 import android.graphics.drawable.Drawable
 import android.support.v4.content.res.ResourcesCompat
+import shape.path.view.utils.DrawableUtils
 import shape.path.view.TextConfigurator
 import shape.path.view.point.converter.PointConverter
 
@@ -52,6 +53,7 @@ class Mark {
 
     fun setDrawable(resId: Int) {
         drawableResId = resId
+        drawable = null
     }
 
     fun setDrawable(drawable: Drawable) {
@@ -66,27 +68,8 @@ class Mark {
     internal fun build(context: Context, pointConverter: PointConverter) {
         items.forEach { it.build(pointConverter) }
         textConfigurator?.build(pointConverter)
-        updateDrawable(context)
-    }
-
-    private fun updateDrawable(context: Context) {
-        if (drawable == null && drawableResId != -1) {
-            drawable = ResourcesCompat.getDrawable(context.resources, drawableResId, null)
-            if (width > 0 && height > 0) {
-                scaleDrawable()
-            }
-        }
-        else if (drawable != null) {
-            val w = drawable!!.bounds.right - drawable!!.bounds.left
-            val h = drawable!!.bounds.bottom - drawable!!.bounds.top
-            if (width > 0 && width.toInt() != w && height > 0 && height.toInt() != h) {
-                scaleDrawable()
-            }
-        }
-    }
-
-    private fun scaleDrawable() {
-        drawable!!.setBounds(0, 0, width.toInt(), height.toInt())
+        //updateDrawable(context)
+        drawable = DrawableUtils.getScaledDrawable(context, drawable, drawableResId, width, height)
     }
 
     internal fun draw(canvas: Canvas) {

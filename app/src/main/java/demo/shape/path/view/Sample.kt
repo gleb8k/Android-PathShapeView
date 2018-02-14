@@ -8,11 +8,12 @@ import android.content.Context
 enum class Sample private constructor(private var stringResId: Int) {
     SIMPLE_SHAPES(R.string.sample_simple_shapes),
     CONTOUR_SAMPLE(R.string.sample_shape_contour),
-    GRADIENT_SAMPLE(R.string.sample_shape_gradient),
+    GRADIENT_AND_TEXTURE_SAMPLE(R.string.sample_fill_shape),
     SHAPE_SET_SAMPLE(R.string.sample_shape_set),
     POINT_CONVERTER_SAMPLE(R.string.sample_point_converter),
     MARKS_SAMPLE(R.string.sample_marks),
-    TEXT_SAMPLE(R.string.sample_text);
+    TEXT_SAMPLE(R.string.sample_text),
+    FILL_WITH_EFFECTS_SAMPLE(R.string.sample_fill_with_effects);
 
     fun getName(context: Context): String {
         return context.getString(stringResId)

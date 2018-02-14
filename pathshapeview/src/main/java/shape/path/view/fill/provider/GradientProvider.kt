@@ -2,6 +2,7 @@ package shape.path.view
 
 import android.graphics.*
 import shape.path.view.point.converter.PointConverter
+import shape.path.view.utils.Utils
 
 /**
  * Created by root on 1/10/18.
@@ -56,17 +57,17 @@ class GradientProvider {
         return this
     }
 
-    internal fun build(converter: PointConverter): Shader {
+    internal fun build(converter: PointConverter, tileMode: Shader.TileMode): Shader {
         convertAllParams(converter)
         val percentage: FloatArray? = if (percentageColorPositions.size < colorList.size) null else percentageColorPositions.toFloatArray()
         return when(type) {
             Type.LINEAR -> {
                 updateLinearValues(converter.screenWidth , converter.screenHeight)
-                LinearGradient(startPoint.x, startPoint.y, endPoint.x, endPoint.y, colorList.toIntArray(), percentage, Shader.TileMode.MIRROR)
+                LinearGradient(startPoint.x, startPoint.y, endPoint.x, endPoint.y, colorList.toIntArray(), percentage, tileMode)
             }
             Type.RADIAL -> {
                 updateRadialValues(converter.screenWidth, converter.screenHeight)
-                RadialGradient(startPoint.x, startPoint.y, length, colorList.toIntArray(), percentage, Shader.TileMode.MIRROR)
+                RadialGradient(startPoint.x, startPoint.y, length, colorList.toIntArray(), percentage, tileMode)
             }
             Type.SWEEP -> {
                 updateRadialValues(converter.screenWidth, converter.screenHeight)

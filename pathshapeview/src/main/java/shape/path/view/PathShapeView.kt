@@ -21,6 +21,10 @@ class PathShapeView : View {
 
     private var pathShape: PathShape = PathShape.create()
 
+    init {
+        setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null)
+    }
+
     fun setPath(pathShape: PathShape) {
         this.pathShape = pathShape
         updateView()

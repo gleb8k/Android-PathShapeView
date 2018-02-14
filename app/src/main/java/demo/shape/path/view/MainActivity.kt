@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), SampleItemHolder.OnItemClickListener {
         fragment = ShapeFragment.newInstance(sample)
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.container, fragment)
-        fragmentTransaction.addToBackStack(ShapeFragment.javaClass.simpleName)
+        fragmentTransaction.addToBackStack(ShapeFragment::javaClass.name)
         fragmentTransaction.commit()
     }
 

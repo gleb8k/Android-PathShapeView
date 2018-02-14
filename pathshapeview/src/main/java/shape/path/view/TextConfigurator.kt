@@ -20,8 +20,10 @@ class TextConfigurator {
     }
 
     init {
+        paint.style = Paint.Style.FILL_AND_STROKE
         paint.textAlign = Paint.Align.CENTER
         paint.typeface = Typeface.DEFAULT
+        //paint.strokeWidth = 30f
     }
 
     fun setTextSize(size: Float) {
@@ -69,9 +71,8 @@ class TextConfigurator {
             paint.getTextPath(text, 0, text.length, 0f, 0f, path)
             val bounds = Rect()
             paint.getTextBounds(text, 0, text.length, bounds)
-            val currentW = Math.abs(bounds.right - bounds.left).toFloat()
-            val currentH = Math.abs(bounds.top - bounds.bottom).toFloat()
-            val currentBounds = RectF(0f, 0f, currentW, currentH)
+            bounds.offsetTo(0, 0)
+            val currentBounds = RectF(bounds)
             val matrix = Matrix()
             val newBounds = RectF(x, y, textWidth + x, textHeight + y)
             matrix.setRectToRect(currentBounds, newBounds, Matrix.ScaleToFit.CENTER)

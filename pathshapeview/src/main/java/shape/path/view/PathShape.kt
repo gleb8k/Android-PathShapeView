@@ -47,11 +47,11 @@ class PathShape private constructor() {
         pointConverter.setScreenSize(screenWidth, screenHeight)
         var strokeWidth = 0f
         contour?.let {
-            it.build(pointConverter)
+            it.build(context, pointConverter)
             strokeWidth = it.paint.strokeWidth
         }
         body?.let {
-            it.build(pointConverter)
+            it.build(context, pointConverter)
         }
         pathProvider?.build(pointConverter, strokeWidth)
         marks.forEach { it.build(context, pointConverter) }

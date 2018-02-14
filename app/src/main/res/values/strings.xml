@@ -4,9 +4,10 @@
     <!-- sample names -->
     <string name="sample_simple_shapes">Simple shapes</string>
     <string name="sample_shape_contour">Contour sample</string>
-    <string name="sample_shape_gradient">Gradient sample</string>
+    <string name="sample_fill_shape">Fill shapes sample</string>
     <string name="sample_shape_set">Shape\'s set sample</string>
     <string name="sample_point_converter">Point converter sample</string>
     <string name="sample_marks">Marks sample</string>
     <string name="sample_text">Text path sample</string>
+    <string name="sample_fill_with_effects">Fill shapes effect sample</string>
 </resources>
