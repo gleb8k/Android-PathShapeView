@@ -7,6 +7,7 @@ This library allows to draw different shapes, lines, marks easily. It's customiz
 ## Table of Contents:
 * **[Setup](#setup)**    
 * **[Usage](#usage)**
+     - **[PathProvider](#pathprovider)**
 * **[Samples](#samples)**
 ## Setup
 
