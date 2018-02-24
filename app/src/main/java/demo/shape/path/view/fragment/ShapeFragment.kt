@@ -1,20 +1,14 @@
-package demo.shape.path.view
+package demo.shape.path.view.fragment
 
 import android.app.Fragment
-import android.graphics.Color
-import android.graphics.PointF
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import co.test.path.pathtest.ContourFillProvider
+import demo.shape.path.view.R
+import demo.shape.path.view.samples.Sample
+import demo.shape.path.view.samples.ShapeManager
 import kotlinx.android.synthetic.main.fragment_shape.*
-import shape.path.view.BodyFillProvider
-import shape.path.view.GradientProvider
-import shape.path.view.PathProvider
-import shape.path.view.PathShape
-import shape.path.view.point.converter.PercentagePointConverter
-import java.util.ArrayList
 
 /**
  * Created by Gleb on 1/26/18.

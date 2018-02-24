@@ -1,4 +1,4 @@
-package demo.shape.path.view
+package demo.shape.path.view.samples
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

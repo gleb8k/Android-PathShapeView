@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    >
 
+    <shape.path.view.PathShapeView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/custom_shape_view"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>

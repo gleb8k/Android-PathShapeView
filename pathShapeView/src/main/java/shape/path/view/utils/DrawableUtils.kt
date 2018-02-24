@@ -27,13 +27,18 @@ class DrawableUtils {
         }
 
         private fun scaleDrawable(drawable: Drawable, width: Float, height: Float) {
-            val w = drawable.bounds.width()
-            val h = drawable.bounds.height()
-            if (width > 0 && width.toInt() != w && height > 0 && height.toInt() != h) {
+            var w = drawable.bounds.width()
+            var h = drawable.bounds.height()
+            if (w == 0 && h == 0 && width == 0f && height == 0f) {
+                w = drawable.intrinsicWidth
+                h = drawable.intrinsicHeight
+                drawable.setBounds(0, 0, w, h)
+            }
+            else if (width > 0 && width.toInt() != w && height > 0 && height.toInt() != h) {
                 drawable.setBounds(0, 0, width.toInt(), height.toInt())
             }
         }
-    }
 
+    }
 
 }

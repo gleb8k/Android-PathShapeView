@@ -1,22 +1,20 @@
-package shape.path.view
+package shape.path.view.graph.function
 
-import android.graphics.Matrix
 import android.graphics.Path
 import android.graphics.PointF
 import android.graphics.RectF
-import shape.path.view.graph.function.GraphFunction
 import shape.path.view.utils.Utils
 
 /**
  * Created by root on 2/19/18.
  */
-class CustomShapeBuilder {
+class CustomLinesBuilder {
 
-    var points = arrayListOf<PointF>()
+    private var points = arrayListOf<PointF>()
     private var isClosed = false
 
     companion object {
-        val DEFAULT_STEP = 4.0f
+        val DEFAULT_STEP_COUNT = 200
     }
 
     fun addPoint(x: Float, y: Float) {
@@ -27,28 +25,25 @@ class CustomShapeBuilder {
         points.add(p)
     }
 
-    fun addGraphPoints(width: Float, height: Float, function: GraphFunction) {
-        this.addGraphPoints(width, height, DEFAULT_STEP, function)
+    fun addGraphPoints(minX: Float, maxX: Float, minY: Float, maxY: Float, function: GraphFunction) {
+        this.addGraphPoints(minX, maxX, minY, maxY, DEFAULT_STEP_COUNT, function)
     }
 
-    fun addGraphPoints(width: Float, height: Float, stepValue: Float, function: GraphFunction) {
-        val maxStepCount = (width / stepValue).toInt()
-        var stepX = 0f
-        var p = function.getTransformFunctionPoint(stepX, stepValue, maxStepCount)
-        addPoint(p)
+    fun addGraphPoints(minX: Float, maxX: Float, minY: Float, maxY: Float, stepCount: Int, function: GraphFunction) {
+        val stepValue = (maxX - minX) / stepCount
+        var x = minX
 
-        while (stepX <= width) {
-            stepX += stepValue
-            p = function.getTransformFunctionPoint(stepX, stepValue, maxStepCount)
-            if (function.originY < height && function.originY > 0f) {
+        while (x < maxX) {
+            var p = function.getTransformFunctionPoint(x, stepValue, stepCount)
+            if (function.originY in minY..maxY) {
                 addPoint(p)
             }
             else {
-                if (function.originY > height || function.originY < 0f) {
+                if (function.originY > maxY || function.originY < minY) {
                     val cur = PointF(function.originX, function.originY)
-                    val f = function.onFunctionGetValue(stepX - stepValue, stepValue, maxStepCount)
-                    val prev = PointF(stepX - stepValue, f)
-                    val res = Utils.getBoundsIntersection(RectF(0f, 0f, width, height), prev, cur)
+                    val f = function.onFunctionGetValue(x - stepValue, stepValue, stepCount)
+                    val prev = PointF(x - stepValue, f)
+                    val res = Utils.getBoundsIntersection(RectF(minX, minY, maxX, maxY), prev, cur)
                     if (res != null) {
                         p = function.getTransformPoint(res.x, res.y)
                     }
@@ -56,10 +51,11 @@ class CustomShapeBuilder {
                 addPoint(p)
                 break
             }
+            x += stepValue
         }
     }
 
-    fun setShapeClosed(isClosed: Boolean) {
+    fun setClosed(isClosed: Boolean) {
         this.isClosed = isClosed
     }
 

@@ -1,6 +1,5 @@
-package demo.shape.path.view.fragment
+package demo.shape.path.view.fragment.custom
 
-import android.annotation.SuppressLint
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

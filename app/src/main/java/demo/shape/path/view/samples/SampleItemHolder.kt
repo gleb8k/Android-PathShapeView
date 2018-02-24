@@ -1,11 +1,11 @@
-package demo.shape.path.view
+package demo.shape.path.view.samples
 
-import android.content.Context
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import demo.shape.path.view.R
 import kotlinx.android.synthetic.main.view_item_sample.view.*
 
 /**

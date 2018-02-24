@@ -22,7 +22,7 @@ class PathShapeView : View {
     private var pathShape: PathShape = PathShape.create()
 
     init {
-        setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null)
+
     }
 
     fun setPath(pathShape: PathShape) {
@@ -32,7 +32,14 @@ class PathShapeView : View {
 
     fun updateView() {
         post {
-            pathShape.build(context, width.toFloat(), height.toFloat())
+            if (pathShape.build(context, width.toFloat(), height.toFloat())) {
+                if (pathShape.hasEffects()) {
+                    setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+                }
+                else {
+                    setLayerType(View.LAYER_TYPE_HARDWARE, null)
+                }
+            }
             invalidate()
         }
     }

@@ -1,4 +1,4 @@
-package shape.path.view
+package shape.path.view.fill.provider
 
 import android.content.Context
 import android.graphics.*
@@ -19,6 +19,7 @@ abstract class FillProvider {
     private var imageWidth: Float = 0f
     private var imageHeight: Float = 0f
     private var convertImageSize: Boolean = false
+    private var hasShadowLayer: Boolean = false
 
     enum class FillType private constructor(internal var mode: Shader.TileMode) {
         REPEAT(Shader.TileMode.REPEAT),
@@ -88,6 +89,12 @@ abstract class FillProvider {
 
     fun setShadow(radius: Float, dx: Float, dy: Float, color: Int) {
         paint.setShadowLayer(radius, dx, dy, color)
+        hasShadowLayer = true
+    }
+
+    internal fun hasEffects(): Boolean {
+        //paint.sh
+        return paint.maskFilter != null || hasShadowLayer
     }
 
     private fun clearBitmap() {
@@ -114,7 +121,7 @@ abstract class FillProvider {
         if (convertImageSize) {
             imageSize = converter.convertPoint(imageSize)
         }
-        bitmap = BitmapUtils.loadBitmap(context, bitmap, imageResId, imageSize.x + 10f, imageSize.y + 10f)
+        bitmap = BitmapUtils.loadBitmap(context, bitmap, imageResId, imageSize.x, imageSize.y)
         var bitmapShader: Shader? = null
         bitmap?.let {
             bitmapShader = BitmapShader(it, fillType.mode, fillType.mode)

@@ -1,4 +1,4 @@
-package shape.path.view
+package shape.path.view.fill.provider
 
 import android.graphics.*
 import shape.path.view.point.converter.PointConverter

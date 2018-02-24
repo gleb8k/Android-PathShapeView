@@ -1,7 +1,6 @@
-package co.test.path.pathtest
+package shape.path.view.fill.provider
 
 import android.graphics.*
-import shape.path.view.FillProvider
 
 /**
  * Created by root on 1/10/18.
@@ -43,7 +42,7 @@ class ContourFillProvider: FillProvider() {
                 return dashPathEffect
             }
             else {
-                return ComposePathEffect(effect, dashPathEffect)
+                return ComposePathEffect(dashPathEffect, effect)
             }
         }
     }

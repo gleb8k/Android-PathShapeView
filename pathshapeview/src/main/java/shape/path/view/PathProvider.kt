@@ -6,6 +6,7 @@ import android.graphics.Path
 import android.graphics.PointF
 import android.graphics.RectF
 import android.os.Build
+import shape.path.view.graph.function.CustomLinesBuilder
 import shape.path.view.point.converter.PointConverter
 
 /**
@@ -36,6 +37,10 @@ class PathProvider {
             }
             putPath(p, operation)
         }
+    }
+
+    fun putCustomShape(customLinesBuilder: CustomLinesBuilder, operation: PathOperation) {
+        putPath(customLinesBuilder.getPath(), operation)
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

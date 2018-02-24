@@ -1,6 +1,7 @@
-package demo.shape.path.view
+package demo.shape.path.view.samples
 
 import android.content.Context
+import demo.shape.path.view.R
 
 /**
  * Created by Gleb on 1/26/18.

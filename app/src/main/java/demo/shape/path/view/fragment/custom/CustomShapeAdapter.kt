@@ -1,4 +1,4 @@
-package demo.shape.path.view.fragment
+package demo.shape.path.view.fragment.custom
 
 import android.content.Context
 import android.graphics.Color
@@ -25,7 +25,7 @@ class CustomShapeAdapter(var context: Context): RecyclerView.Adapter<CustomShape
         WaveFunction.WaveType.values().forEach {
             val pathProvider = PathProvider()
             val f = WaveFunction(0.2f, 0.1f, it)
-            f.offset(0f, 0.8f)
+            f.offset(0f, 0.85f)
             val shape = CustomLinesBuilder()
             shape.addGraphPoints( 0f, 1f, -1f, 1f, f)
             shape.addPoint(1f, 0f)
@@ -34,10 +34,12 @@ class CustomShapeAdapter(var context: Context): RecyclerView.Adapter<CustomShape
             pathProvider.putCustomShape(shape, PathProvider.PathOperation.ADD)
             val body = BodyFillProvider()
             val gradient = GradientProvider()
+            gradient.addColor(Color.LTGRAY)
             gradient.addColor(ContextCompat.getColor(context, R.color.colorAccent))
-            gradient.addColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            gradient.setAngle(90f)
             body.setGradient(gradient)
-            body.setShadow(0f, 15f, 15f, Color.BLACK)
+            body.setRoundedCorners(30f)
+
             items.add(PathShape.create()
                     .setPath(pathProvider)
                     .fillBody(body)

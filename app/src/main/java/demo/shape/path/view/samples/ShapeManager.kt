@@ -1,9 +1,10 @@
-package demo.shape.path.view
+package demo.shape.path.view.samples
 
 import android.graphics.Color
 import android.graphics.PointF
-import co.test.path.pathtest.ContourFillProvider
+import demo.shape.path.view.R
 import shape.path.view.*
+import shape.path.view.fill.provider.*
 import shape.path.view.graph.function.CustomLinesBuilder
 import shape.path.view.graph.function.WaveFunction
 import shape.path.view.mark.Mark
@@ -17,7 +18,7 @@ import kotlin.collections.ArrayList
 class ShapeManager {
 
     fun getShapes(sample: Sample): List<PathShape> {
-        when(sample) {
+        when (sample) {
             Sample.SIMPLE_SHAPES -> return getSampleShapes()
             Sample.CONTOUR_SAMPLE -> return getContourSamples()
             Sample.GRADIENT_AND_TEXTURE_SAMPLE -> return getGradientSamples()
