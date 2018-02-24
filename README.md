@@ -5,8 +5,9 @@
 This library allows to draw different shapes, lines, marks easily. It's customizable and provides posibility to fill your custom shapes by color, gradient or texture. Also you can fill just by stroke with color, gradient or texture. If you want to add some labels or marks on your shapes or lines it's not difficult with this toolbox.
 
 ## Table of Contents:
-* **[Setup](#Setup)**    
-* **[Usage](#Usage)**
+* **[Setup](#setup)**    
+* **[Usage](#usage)**
+* **[Samples](#samples)**
 ## Setup
 
 Add it in your root `build.gradle` at the end of repositories:
