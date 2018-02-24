@@ -52,7 +52,7 @@ Use *PathShape* class to config graphic items
 ```
 *PathShape* contains of:
 
-* **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)  
+* ### **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)  
 Just to simple add item use **ADD** operation.
 There are several items which you can create:
 	- **putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)** - add lines by list of points,
