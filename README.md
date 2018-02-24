@@ -180,10 +180,7 @@ Draw arc
         contour.addDotParams(40f, 40f)
         contour.addDotParams(40f, 40f)
         contour.setIsDotRounded(true)
-        val pathShape = PathShape.create()
-                .setPath(pathProvider)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter())
+        ...
 ```
 
 * Shape with gradient sample
@@ -209,11 +206,7 @@ Draw arc
         var contour = ContourFillProvider()
         contour.setGradient(gradient)
         contour.setWidth(100f)
-        var pathShape = PathShape.create()
-                .setPath(pathProvider)
-                .fillBody(body)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter())
+        ...
 ```
 
 * Logical operations with shapes
@@ -229,11 +222,7 @@ Draw arc
         contour.setWidth(20f)
         var body = BodyFillProvider()
         body.setColor(Color.LTGRAY)
-        list.add(PathShape.create()
-                .setPath(pathProvider)
-                .fillBody(body)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter()))
+	...
 ```
 ```kotlin
 	...
@@ -316,6 +305,22 @@ Emboss effect
 Shadow
 ```kotlin
 	contour.setShadow(15f, 10f, 10f, Color.BLACK)
+```
+
+* Sample with list of custom wave shapes
+
+![wave_items](https://user-images.githubusercontent.com/34940037/36630163-8eb9c91c-196a-11e8-95d2-c0a8ee99e0c8.jpg)
+```kotlin
+	val pathProvider = PathProvider()
+        val f = WaveFunction(0.2f, 0.1f, WaveType.SINE)
+        f.offset(0f, 0.85f)
+        val shape = CustomLinesBuilder()    
+        shape.addGraphPoints( 0f, 1f, -1f, 1f, f)
+        shape.addPoint(1f, 0f)
+        shape.addPoint(0f, 0f)
+        shape.setClosed(true)
+        pathProvider.putCustomShape(shape, PathProvider.PathOperation.ADD)
+	...
 ```
 
 ## License
