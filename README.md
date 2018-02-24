@@ -63,8 +63,19 @@ There are several items which you can create:
 	- **putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed rectangle 		contour
 	- **putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)** - 		   add a closed round-rectangle contour
 	- **putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, 	       operation: PathOperation)** - add text
-
+	- **putCustomShape(customLinesBuilder: CustomLinesBuilder, operation: PathOperation)** - add **customLinesBuilder** 		   object
 	
+* **CustomLinesBuilder** - class which helps to create custom lines by points or by function
+	- **addPoint(x: Float, y: Float)** - add new point
+	- **addGraphPoints(minX: Float, maxX: Float, minY: Float, maxY: Float, function: GraphFunction)** - add points created 			by function and limited by bounds: minX, maxX, minY, maxY.
+	- **setClosed(isClosed: Boolean)** - close the current contour
+* **GraphFunction** - abstract class which provide function
+	- **onFunctionGetValue(xValue: Float, stepValue: Float, maxStepCount: Int): Float** - return function value
+	- **offset(dx: Float, dy: Float)** - offset current point by distance
+	- **rotate(angle: Float)** - rotate current point by angle
+	- **skew(kx: Float, ky: Float)** - skew current point by coefficients
+* **WaveFunction(var waveWidth: Float, var waveHeight: Float, var waveType: WaveType)** - class allows to create wave function
+	by waveType(SINE, SINE_ARC, SINE_ARC_REVERSE, SQUARE, TRIANGLE, SAWTOOTH)
 * **BodyFillProvider** - class which allows to fill your graphic items. There are methods of **BodyFillProvider**:
 	- **setColor(color: Int)** - set the fill color
 	- **setGradient(gradient: GradientProvider)** - set the fill gradient. There are methods of **GradientProvider**:  
