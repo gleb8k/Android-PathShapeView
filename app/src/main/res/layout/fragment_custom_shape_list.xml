@@ -47,7 +47,6 @@
                     android:fitsSystemWindows="true"
                     android:layout_centerVertical="true"
                     android:scaleType="fitCenter"
-                    android:transformPivotY="0dp"
                     android:layout_margin="10dp"
                     />
             </RelativeLayout>
@@ -67,18 +66,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-
-    <!--<android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:clickable="true"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="6dp"
-        app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="bottom|right|end" />-->
 
 </android.support.design.widget.CoordinatorLayout>

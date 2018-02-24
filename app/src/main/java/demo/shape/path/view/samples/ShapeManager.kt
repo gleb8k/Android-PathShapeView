@@ -410,24 +410,6 @@ class ShapeManager {
                 .setPointConverter(PercentagePointConverter())
         )
 
-        //4th
-        pathProvider = PathProvider()
-        val f = WaveFunction(0.2f, 0.1f, WaveFunction.WaveType.SAWTOOTH)
-        //f.rotate(90f)
-        f.offset(0f, 0.1f)
-        val shape = CustomLinesBuilder()
-        shape.addGraphPoints( 0f, 1f, -1f, 1f, f)
-        //shape.setClosed(true)
-        pathProvider.putCustomShape(shape, PathProvider.PathOperation.ADD)
-        //pathProvider.putGraph(PointF(0f, 400f), 800f, 400f, 4f, f, false, PathProvider.PathOperation.ADD)
-        contour = ContourFillProvider()
-        contour.setColor(Color.BLACK)
-        contour.setWidth(2f)
-        list.add(PathShape.create()
-                .setPath(pathProvider)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter()))
-       // )
         return list
     }
 
