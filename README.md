@@ -7,8 +7,8 @@ This library allows to draw different shapes, lines, marks easily. It's customiz
 ## Table of Contents:
 * **[Setup](#setup)**    
 * **[Usage](#usage)**
-     - **[PathProvider](#pathProvider)**
 * **[Samples](#samples)**
+* **[License](#license)**
 ## Setup
 
 Add it in your root `build.gradle` at the end of repositories:
@@ -52,7 +52,7 @@ Use *PathShape* class to config graphic items
 ```
 *PathShape* contains of:
 
-* ### **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)  
+* **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)  
 Just to simple add item use **ADD** operation.
 There are several items which you can create:
 	- **putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation)** - add lines by list of points,
@@ -286,16 +286,7 @@ Draw arc
         var tc = TextConfigurator()
         tc.setStyle(TextConfigurator.Style.BOLD, TextConfigurator.Style.ITALIC)
         pathProvider.putText(PointF(0.5f, 0.5f), 0.5f, 0.2f,"Hello!", tc, PathProvider.PathOperation.ADD)
-        var body = BodyFillProvider()
-        body.setColor(Color.LTGRAY)
-        var contour = ContourFillProvider()
-        contour.setColor(Color.BLACK)
-        contour.setWidth(5f)
-        list.add(PathShape.create()
-                .setPath(pathProvider)
-                .fillBody(body)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter()))
+        ...
 ```
 
 * Sample with effects
@@ -303,28 +294,9 @@ Draw arc
 ![effects](https://user-images.githubusercontent.com/34940037/36228997-7dbb8cec-11de-11e8-8488-17f98be755fd.jpg)  
 Glow effect
 ```kotlin
-	var list = arrayListOf<PathShape>()
-        var pathProvider = PathProvider()
-        var points = ArrayList<PointF>()
-        points.add(PointF(0.1f, 0.9f))
-        points.add(PointF(0.5f, 0.1f))
-        points.add(PointF(0.9f, 0.9f))
-        pathProvider.putLines(points, true, PathProvider.PathOperation.ADD)
-        var body = BodyFillProvider()
-        body.setTexture(R.drawable.bridge)
-        body.fitTextureToSize(1f, 1f, true)
-        body.setFillType(FillProvider.FillType.CLAMP)
-        body.setRoundedCorners(30f)
-        var contour = ContourFillProvider()
-        contour.setColor(Color.BLUE)
-        contour.setWidth(10f)
-        contour.setRoundedCorners(30f)
+	...
         contour.setGlowEffect(30f, FillProvider.GlowType.SOLID)
-        list.add(PathShape.create()
-                .setPath(pathProvider)
-                .fillBody(body)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter()))
+        ...
 ```
 Emboss effect
 ```kotlin
@@ -335,7 +307,7 @@ Shadow
 	contour.setShadow(15f, 10f, 10f, Color.BLACK)
 ```
 
-# License
+## License
 
    Copyright (c) 2018 gleb8k
 
