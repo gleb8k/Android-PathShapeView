@@ -55,31 +55,4 @@ class ShapeFragment : Fragment() {
             views[i].setPath(shapes[i])
         }
     }
-
-    fun getPathShape(): PathShape {
-        val pathProvider = PathProvider()
-        val list = ArrayList<PointF>()
-        list.add(PointF(0f, 0f))
-        list.add(PointF(1f, 0f))
-        list.add(PointF(1f, 1f))
-        list.add(PointF(0f, 1f))
-        pathProvider.putLines(list, true, PathProvider.PathOperation.ADD)
-        val gradient = GradientProvider()
-        gradient.addColor(Color.WHITE)
-                .addColor(Color.BLACK)
-                .setAngle(45f)
-                .setType(GradientProvider.Type.LINEAR)
-        val body = BodyFillProvider()
-        body.setGradient(gradient)
-        body.setRoundedCorners(180f)
-        val contour = ContourFillProvider()
-        contour.setColor(Color.BLACK)
-        contour.setRoundedCorners(180f)
-        contour.setWidth(30f)
-        return PathShape.create()
-                .setPath(pathProvider)
-                .fillBody(body)
-                .fillContour(contour)
-                .setPointConverter(PercentagePointConverter())
-    }
 }
