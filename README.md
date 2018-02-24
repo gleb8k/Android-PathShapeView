@@ -2,7 +2,7 @@
 [![](https://jitpack.io/v/gleb8k/Android-PathShapeView.svg)](https://jitpack.io/#gleb8k/Android-PathShapeView)
 [![](https://img.shields.io/badge/license-APACHE2-blue.svg)](https://github.com/gleb8k/Android-PathShapeView/blob/master/LICENSE)
 
-This library allows to draw different shapes, lines, marks easily. It's customizable and provides posibility to fill your custom shapes by color or gradient. Also you can fill just by stroke with color or gradient. If you want to add some labels or marks on your shapes or lines it's not difficult with this toolbox.
+This library allows to draw different shapes, lines, marks easily. It's customizable and provides posibility to fill your custom shapes by color, gradient or texture. Also you can fill just by stroke with color, gradient or texture. If you want to add some labels or marks on your shapes or lines it's not difficult with this toolbox.
 
 ## Setup
 
@@ -20,7 +20,7 @@ Then add the dependencies that you need in your project.
 
 ```gradle
 dependencies {
-	compile 'com.github.gleb8k:Android-PathShapeView:1.1.5'
+	compile 'com.github.gleb8k:Android-PathShapeView:1.1.7'
 }
 ```
 ## Usage
@@ -69,7 +69,17 @@ There are several items which you can create:
 	     - **gradient.setStartPoint(startPoint: PointF)** - set the start position of gradient  
 	     - **gradient.addColor(color: Int)** - add new color to gradient  
 	     - **gradient.addColor(color: Int, colorPosition: Float)** - add new color to gradient with color position, 		  colorPosition can be in [0..1]  
-	- **setRoundedCorners(radius: Float)** - set all corners rounded with radius     
+	- **setTexture(resId: Int)** - set the fill texture by resource id 
+	- **setTexture(bitmap: Bitmap)** - set the fill texture by bitmap
+	- **fitTextureToSize(width: Float, height: Float)** - fit texture to current size
+	- **fitTextureToSize(width: Float, height: Float, convertWithPointConverter: Boolean)** - fit texture to current size
+          with possibility to convert setted size
+	- **setFillType(fillType: FillType)** - set fill type for gradient or texture (REPEAT, MIRROR, CLAMP)  
+	- **setRoundedCorners(radius: Float)** - set all corners rounded with radius
+	- **setGlowEffect(radius: Float, glowType: GlowType)** - set the glow effect with radius and type (NORMAL, SOLID, 	    OUTER, INNER)
+	- **setEmbossEffect(angle: Float, embossType: EmbossType)** - set the emboss effect with angle of direction and type
+	  (EMBOSS, EXTRUDE)
+	- **setShadow(radius: Float, dx: Float, dy: Float, color: Int)** - draws a shadow, with the specified offset and 	   color, and blur radius.
 * **ContourFillProvider** - class which allows to draw the contour of your graphic items. Has the same methods with the 	**BodyFillProvider** class and several specified methods:
 	- **setWidth(width: Float)** - set the width of contour
 	- **setIsDotRounded(isDotRounded: Boolean)** - if your contour is dashed it allows to round your dots
@@ -282,6 +292,44 @@ Draw arc
                 .fillContour(contour)
                 .setPointConverter(PercentagePointConverter()))
 ```
+
+* Sample with effects
+
+![effects](https://user-images.githubusercontent.com/34940037/36228997-7dbb8cec-11de-11e8-8488-17f98be755fd.jpg)  
+Glow effect
+```kotlin
+	var list = arrayListOf<PathShape>()
+        var pathProvider = PathProvider()
+        var points = ArrayList<PointF>()
+        points.add(PointF(0.1f, 0.9f))
+        points.add(PointF(0.5f, 0.1f))
+        points.add(PointF(0.9f, 0.9f))
+        pathProvider.putLines(points, true, PathProvider.PathOperation.ADD)
+        var body = BodyFillProvider()
+        body.setTexture(R.drawable.bridge)
+        body.fitTextureToSize(1f, 1f, true)
+        body.setFillType(FillProvider.FillType.CLAMP)
+        body.setRoundedCorners(30f)
+        var contour = ContourFillProvider()
+        contour.setColor(Color.BLUE)
+        contour.setWidth(10f)
+        contour.setRoundedCorners(30f)
+        contour.setGlowEffect(30f, FillProvider.GlowType.SOLID)
+        list.add(PathShape.create()
+                .setPath(pathProvider)
+                .fillBody(body)
+                .fillContour(contour)
+                .setPointConverter(PercentagePointConverter()))
+```
+Emboss effect
+```kotlin
+	body.setEmbossEffect(45f, FillProvider.EmbossType.NORMAL)
+```
+Shadow
+```kotlin
+	contour.setShadow(15f, 10f, 10f, Color.BLACK)
+```
+
 # License
 
    Copyright (c) 2018 gleb8k
