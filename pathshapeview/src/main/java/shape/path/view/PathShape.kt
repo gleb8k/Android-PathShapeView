@@ -16,9 +16,8 @@ class PathShape private constructor() {
     internal var body: BodyFillProvider? = null
     internal var contour: ContourFillProvider? = null
     internal var pathProvider: PathProvider? = null
+    internal var marks: ArrayList<Mark> = arrayListOf()
     private var pointConverter: PointConverter = DefaultPointConverter()
-    private var marks: ArrayList<Mark> = arrayListOf()
-    private var isBuilt: Boolean = false
 
     fun setPath(provider: PathProvider): PathShape {
         this.pathProvider = provider
@@ -49,23 +48,18 @@ class PathShape private constructor() {
         return contour?.hasEffects() ?: false || body?.hasEffects() ?: false
     }
 
-    internal fun build(context: Context, screenWidth: Float, screenHeight: Float): Boolean {
-        if (!isBuilt) {
-            isBuilt = true
-            pointConverter.setScreenSize(screenWidth, screenHeight)
-            var strokeWidth = 0f
-            contour?.let {
-                it.build(context, pointConverter)
-                strokeWidth = it.paint.strokeWidth
-            }
-            body?.let {
-                it.build(context, pointConverter)
-            }
-            pathProvider?.build(pointConverter, strokeWidth)
-            marks.forEach { it.build(context, pointConverter) }
-            return true
+    internal fun build(context: Context, screenWidth: Float, screenHeight: Float) {
+        pointConverter.setScreenSize(screenWidth, screenHeight)
+        var strokeWidth = 0f
+        contour?.let {
+            it.build(context, pointConverter)
+            strokeWidth = it.paint.strokeWidth
         }
-        return false
+        body?.let {
+            it.build(context, pointConverter)
+        }
+        pathProvider?.build(pointConverter, strokeWidth)
+        marks.forEach { it.build(context, pointConverter) }
     }
 
     internal fun draw(canvas: Canvas) {

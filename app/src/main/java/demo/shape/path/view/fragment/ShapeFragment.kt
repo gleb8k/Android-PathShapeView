@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import demo.shape.path.view.R
 import demo.shape.path.view.samples.Sample
 import demo.shape.path.view.samples.ShapeManager
 import kotlinx.android.synthetic.main.fragment_shape.*
+import shape.path.view.PathShapeView
+import shape.path.view.mark.MarkItem
 
 /**
  * Created by Gleb on 1/26/18.
  */
-class ShapeFragment : Fragment() {
+class ShapeFragment : Fragment(), PathShapeView.OnMarkClickListener, View.OnClickListener {
 
     private var sample: Sample = Sample.SIMPLE_SHAPES
 
@@ -48,5 +51,21 @@ class ShapeFragment : Fragment() {
         for (i in 0 until shapes.size) {
             views[i].setPath(shapes[i])
         }
+        if (sample == Sample.MARKS_SAMPLE) {
+            for (i in 0 until shapes.size) {
+                views[i].setOnMarkClickListener(this)
+                views[i].id = i
+                views[i].setOnClickListener(this)
+            }
+        }
+    }
+
+    override fun onMarkClick(markId: Int, markItem: MarkItem) {
+        Toast.makeText(activity, "mark Id: " + markId + ", item index: " + markItem.index +
+                ", item label: " + markItem.label, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onClick(v: View?) {
+        Toast.makeText(activity, "view Id: " + v!!.id, Toast.LENGTH_SHORT).show() //To change body of created functions use File | Settings | File Templates.
     }
 }

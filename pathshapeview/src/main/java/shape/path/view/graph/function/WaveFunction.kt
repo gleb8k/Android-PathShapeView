@@ -8,26 +8,26 @@ class WaveFunction(var waveWidth: Float, var waveHeight: Float, var waveType: Wa
     enum class WaveType {
         SINE {
             override fun getFunction(waveWidth: Float, waveHeight: Float, xValue: Float, stepValue: Float): Float {
-                val k = (2.0f * Math.PI / waveWidth).toFloat()
-                return (waveHeight * Math.sin(k * (xValue).toDouble())).toFloat()
+                val k = 2.0f * Math.PI / waveWidth
+                return (waveHeight * Math.sin(k * xValue)).toFloat()
             }
         },
         SINE_ARC {
             override fun getFunction(waveWidth: Float, waveHeight: Float, xValue: Float, stepValue: Float): Float {
-                val k = (Math.PI / waveWidth).toFloat()
-                return Math.abs(waveHeight * Math.sin(k * (xValue).toDouble())).toFloat()
+                val k = Math.PI / waveWidth
+                return Math.abs(waveHeight * Math.sin(k * xValue)).toFloat()
             }
         },
         SINE_ARC_REVERSE {
             override fun getFunction(waveWidth: Float, waveHeight: Float, xValue: Float, stepValue: Float): Float {
-                val k = (Math.PI / waveWidth).toFloat()
-                return -Math.abs(waveHeight * Math.cos(k * (xValue).toDouble())).toFloat()
+                val k = Math.PI / waveWidth
+                return -Math.abs(waveHeight * Math.cos(k * xValue)).toFloat()
             }
         },
         SQUARE {
             override fun getFunction(waveWidth: Float, waveHeight: Float, xValue: Float, stepValue: Float): Float {
-                val k = (2.0f * Math.PI / waveWidth).toFloat()
-                val f = Math.sin(k * (xValue).toDouble()).toFloat()
+                val k = 2.0f * Math.PI / waveWidth
+                val f = Math.sin(k * xValue).toFloat()
                 return waveHeight * Math.signum(f)
             }
         },

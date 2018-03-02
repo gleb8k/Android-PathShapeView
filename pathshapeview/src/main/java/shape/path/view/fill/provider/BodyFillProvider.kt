@@ -9,10 +9,6 @@ class BodyFillProvider : FillProvider() {
 
     init {
         paint.style = Paint.Style.FILL
-        //paint.strokeWidth = 100f
     }
 
-    /*internal fun setStrokeWidth(width: Float) {
-        paint.strokeWidth = width
-    }*/
 }
