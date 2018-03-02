@@ -16,6 +16,8 @@ class PathProvider {
     internal val path: Path = Path()
     internal var contourPath: Path? = null
 
+    private var isBuilt = false
+
     enum class PathOperation {
         ADD,
         SUB,
@@ -75,6 +77,26 @@ class PathProvider {
         putPath(p, operation)
     }
 
+    fun putPoly(centerPoint: PointF, radius:Float, angleRotation: Float, sidesCount:Int, operation: PathOperation) {
+        if (sidesCount < 3) {
+            return
+        }
+        val p = Path()
+        val a = Math.toRadians(angleRotation.toDouble())
+        for (i in 0 until sidesCount) {
+            val x = (Math.sin( i.toDouble() / sidesCount * 2 * Math.PI + a) * radius).toFloat() + centerPoint.x
+            val y = (Math.cos( i.toDouble() / sidesCount * 2 * Math.PI + a) * radius).toFloat() + centerPoint.y
+            if (i == 0) {
+                p.moveTo(x, y)
+            }
+            else {
+                p.lineTo(x, y)
+            }
+        }
+        p.close()
+        putPath(p, operation)
+    }
+
     fun putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, operation: PathOperation) {
         val p = textConfigurator.getPath(text, centerPoint, width, height)
         putPath(p, operation)
@@ -101,9 +123,14 @@ class PathProvider {
         val bottom = centerPoint.y + height / 2
         val start = PointF(left, top)
         val end = PointF(right, bottom)
-        //val radii = floatArrayOf(cornerRadius,cornerRadius,cornerRadius,cornerRadius, 0f, 0f, 0f, 0f)
         p.addRoundRect(start.x, start.y, end.x, end.y, cornerRadius * 1.5f, cornerRadius, Path.Direction.CCW)
         putPath(p, operation)
+    }
+
+    fun reset() {
+        path.reset()
+        contourPath?.reset()
+        isBuilt = false
     }
 
     private fun putPath(p: Path, operation: PathOperation) {
@@ -122,11 +149,15 @@ class PathProvider {
     }
 
     internal fun build(converter: PointConverter, contourWidth: Float) {
-        val m = converter.getMatrix()
-        if (!m.isIdentity) {
-            path.transform(m)
+        if (!isBuilt) {
+            val m = converter.getMatrix()
+            if (!m.isIdentity) {
+                path.transform(m)
+            }
+            fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
+            isBuilt = true
         }
-        fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
+
     }
 
     private fun fitContourPath(screenWidth: Float, screenHeight: Float, contourWidth: Float) {

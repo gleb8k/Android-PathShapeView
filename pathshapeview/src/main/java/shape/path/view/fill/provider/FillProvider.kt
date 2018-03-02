@@ -11,6 +11,7 @@ import shape.path.view.utils.Utils
  */
 abstract class FillProvider {
     internal val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
+
     private var gradient: GradientProvider? = null
     private var roundedCornerRadius: Float = 0f
     private var fillType: FillType = FillType.MIRROR
@@ -20,6 +21,9 @@ abstract class FillProvider {
     private var imageHeight: Float = 0f
     private var convertImageSize: Boolean = false
     private var hasShadowLayer: Boolean = false
+
+    internal open var shaderChanged = false
+    internal open var pathEffectChanged = false
 
     enum class FillType private constructor(internal var mode: Shader.TileMode) {
         REPEAT(Shader.TileMode.REPEAT),
@@ -47,34 +51,41 @@ abstract class FillProvider {
 
     fun setGradient(gradient: GradientProvider) {
         this.gradient = gradient
+        shaderChanged = true
     }
 
     fun setFillType(fillType: FillType) {
         this.fillType = fillType
+        shaderChanged = true
     }
 
     fun setTexture(resId: Int) {
         clearBitmap()
         this.imageResId = resId
+        shaderChanged = true
     }
 
     fun setTexture(bitmap: Bitmap) {
         clearBitmap()
         this.bitmap = bitmap
+        shaderChanged = true
     }
 
     fun fitTextureToSize(width: Float, height: Float) {
         this.fitTextureToSize(width, height, false)
+        shaderChanged = true
     }
 
     fun fitTextureToSize(width: Float, height: Float, convertWithPointConverter: Boolean) {
         this.imageWidth = width
         this.imageHeight = height
         this.convertImageSize = convertWithPointConverter
+        shaderChanged = true
     }
 
     fun setRoundedCorners(radius: Float) {
         roundedCornerRadius = radius
+        pathEffectChanged = true
     }
 
     fun setGlowEffect(radius: Float, glowType: GlowType) {
@@ -92,8 +103,14 @@ abstract class FillProvider {
         hasShadowLayer = true
     }
 
+    fun clearAllEffects() {
+        if (hasShadowLayer) {
+            paint.clearShadowLayer()
+        }
+        paint.maskFilter = null
+    }
+
     internal fun hasEffects(): Boolean {
-        //paint.sh
         return paint.maskFilter != null || hasShadowLayer
     }
 
@@ -112,8 +129,14 @@ abstract class FillProvider {
     }
 
     internal fun build(context: Context, converter: PointConverter) {
-        paint.pathEffect = buildEffect()
-        paint.shader = buildShader(context, converter)
+        if (pathEffectChanged) {
+            paint.pathEffect = buildEffect()
+            pathEffectChanged = false
+        }
+        if (shaderChanged) {
+            paint.shader = buildShader(context, converter)
+            shaderChanged = false
+        }
     }
 
     private fun buildShader(context: Context, converter: PointConverter): Shader? {
@@ -135,4 +158,5 @@ abstract class FillProvider {
         }
         return ComposeShader(bitmapShader, gradientShader, PorterDuff.Mode.MULTIPLY)
     }
+
 }

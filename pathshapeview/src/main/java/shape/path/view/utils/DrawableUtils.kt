@@ -3,11 +3,6 @@ package shape.path.view.utils
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.content.res.ResourcesCompat
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-
-
 
 /**
  * Created by root on 2/12/18.

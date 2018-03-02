@@ -2,7 +2,6 @@ package shape.path.view
 
 import android.graphics.*
 import android.text.TextPaint
-import shape.path.view.point.converter.PointConverter
 
 /**
  * Created by root on 1/25/18.
@@ -57,10 +56,6 @@ class TextConfigurator {
                 Style.ITALIC -> paint.textSkewX = -0.2f
             }
         }
-    }
-
-    internal fun build(pointConverter: PointConverter) {
-
     }
 
     internal fun getPath(text: String, position: PointF, textWidth: Float, textHeight: Float): Path {

@@ -29,6 +29,7 @@ class ContourFillProvider: FillProvider() {
     fun addDotParams(dotLength: Float, dotDistance: Float) {
         dotParams.add(dotLength)
         dotParams.add(dotDistance)
+        pathEffectChanged = true
     }
 
     override fun buildEffect(): PathEffect? {
