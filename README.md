@@ -25,7 +25,7 @@ Then add the dependencies that you need in your project.
 
 ```gradle
 dependencies {
-	compile 'com.github.gleb8k:Android-PathShapeView:1.1.8'
+	compile 'com.github.gleb8k:Android-PathShapeView:1.1.9'
 }
 ```
 ## Usage
@@ -50,8 +50,6 @@ Use *PathShape* class to config graphic items
 	pathShapeView.setPath(pathShape)
 	...
 ```
-*PathShape* contains of:
-
 * **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)  
 Just to simple add item use **ADD** operation.
 There are several items which you can create:
@@ -60,6 +58,8 @@ There are several items which you can create:
 	- **putArc(centerPoint: PointF, width:Float, height:Float, startAngle: Float, sweepAngle: Float, 	operation:		PathOperation)** - add arc to the path as a new contour
 	- **putOval(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed oval contour
 	- **putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)** - add a closed circle contour
+	- **putPoly(centerPoint: PointF, radius:Float, angleRotation: Float, sidesCount:Int, operation: PathOperation)** -
+		add equilateral polygon 
 	- **putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed rectangle 		contour
 	- **putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)** - 		   add a closed round-rectangle contour
 	- **putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, 	       operation: PathOperation)** - add text
@@ -120,6 +120,16 @@ There are several items which you can create:
 	- **PercentagePointConverter** - convert all points with percantage aspect ratio to view size. Positions can be in 		[0..1]. If position is out of range converted position will be out of view size.
 	- **CoordinateConverter** - convert all positions from old view bounds(width and height) with aspect ratio to current 		   view size 
 
+Set *OnMarkClickListener* to view
+
+*PathShape* contains of:
+```kotlin
+	pathShapeView.setOnMarkClickListener(object : PathShapeView.OnMarkClickListener {
+                    override fun onMarkClick(markId: Int, markItem: MarkItem) {
+                         //To change body of created functions use File | Settings | File Templates.
+                    }
+                })
+```
 ## Samples
 
 * Sample for drawing shapes
