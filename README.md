@@ -25,7 +25,7 @@ Then add the dependencies that you need in your project.
 
 ```gradle
 dependencies {
-	compile 'com.github.gleb8k:Android-PathShapeView:1.1.9'
+	compile 'com.github.gleb8k:Android-PathShapeView:1.2.0'
 }
 ```
 ## Usage
@@ -60,6 +60,7 @@ There are several items which you can create:
 	- **putCircle(centerPoint: PointF, radius:Float, operation: PathOperation)** - add a closed circle contour
 	- **putPoly(centerPoint: PointF, radius:Float, angleRotation: Float, sidesCount:Int, operation: PathOperation)** -
 		add equilateral polygon 
+	- **putStar(centerPoint: PointF, outerRadius:Float, innerRadius: Float, angleRotation: Float, sidesCount:Int, 	    		   operation: PathOperation)** - add star shape 
 	- **putRect(centerPoint: PointF, width:Float, height:Float, operation: PathOperation)** - add a closed rectangle 		contour
 	- **putRoundRect(centerPoint: PointF, width:Float, height:Float, cornerRadius: Float, operation: PathOperation)** - 		   add a closed round-rectangle contour
 	- **putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, 	       operation: PathOperation)** - add text
