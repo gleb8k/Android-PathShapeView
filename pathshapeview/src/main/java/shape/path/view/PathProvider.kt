@@ -97,6 +97,43 @@ class PathProvider {
         putPath(p, operation)
     }
 
+    fun putStar(centerPoint: PointF, outerRadius:Float, innerRadius: Float, angleRotation: Float, sidesCount:Int, operation: PathOperation) {
+        if (sidesCount < 3) {
+            return
+        }
+        val p = Path()
+        val rotation = Math.toRadians(angleRotation.toDouble())
+        val angle = (2 * Math.PI) / sidesCount
+        val n = 2 * sidesCount
+        var innerStep = 0
+        var outerStep = 0
+        for(i in 0 until n) {
+            val k = i % 2
+            var omega: Double
+            var r: Float
+            if (k == 0) {
+                omega = angle * outerStep + rotation
+                r = outerRadius
+                outerStep++
+            }
+            else {
+                omega = angle * innerStep + angle / 2 + rotation
+                r = innerRadius
+                innerStep++
+            }
+            val x = r * Math.sin(omega).toFloat() + centerPoint.x
+            val y = r * Math.cos(omega).toFloat() + centerPoint.y
+            if (i == 0) {
+                p.moveTo(x, y)
+            }
+            else {
+                p.lineTo(x, y)
+            }
+        }
+        p.close()
+        putPath(p, operation)
+    }
+
     fun putText(centerPoint: PointF, width: Float, height: Float, text: String, textConfigurator: TextConfigurator, operation: PathOperation) {
         val p = textConfigurator.getPath(text, centerPoint, width, height)
         putPath(p, operation)

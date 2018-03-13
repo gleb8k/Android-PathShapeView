@@ -10,13 +10,19 @@ import android.support.v4.content.res.ResourcesCompat
 class DrawableUtils {
 
     companion object {
+
         internal fun getScaledDrawable(context: Context, drawable: Drawable?, drawableResId: Int, width: Float, height: Float): Drawable? {
             var result: Drawable? = drawable
-            if (result == null && drawableResId != -1) {
-                result = ResourcesCompat.getDrawable(context.resources, drawableResId, null)
+            try {
+                if (result == null && drawableResId != -1) {
+                    result = ResourcesCompat.getDrawable(context.resources, drawableResId, null)
+                }
+                if (result != null) {
+                    scaleDrawable(result, width, height)
+                }
             }
-            if (result != null) {
-                scaleDrawable(result, width, height)
+            catch (e: Exception) {
+                e.printStackTrace()
             }
             return result
         }

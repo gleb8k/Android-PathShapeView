@@ -58,11 +58,13 @@ class PathShapeView : View {
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (onMarkClickListener != null) {
             when(event!!.action) {
-                MotionEvent.ACTION_UP,
-                MotionEvent.ACTION_CANCEL -> {
+                MotionEvent.ACTION_UP -> {
                     pathShape.marks.forEach {
                         val markItem = it.onItemClick(event.x, event.y)
                         if (markItem != null) {
+                            if (it.hasSelectedDrawable()) {
+                                invalidate()
+                            }
                             onMarkClickListener!!.onMarkClick(it.getId(), markItem)
                             return true
                         }

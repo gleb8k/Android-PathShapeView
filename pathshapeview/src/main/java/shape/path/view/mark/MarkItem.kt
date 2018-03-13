@@ -12,6 +12,7 @@ class MarkItem {
     var position: PointF = PointF(0f, 0f)
     var label: String? = null
     var bounds = RectF()
+    var isSelected = false
 
     internal fun build(pointConverter: PointConverter, touchWidth: Float,touchHeight: Float) {
         position = pointConverter.convertPoint(position)
