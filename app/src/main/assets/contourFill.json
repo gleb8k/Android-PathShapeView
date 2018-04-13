@@ -1,0 +1,45 @@
+{
+  "color":"#000000",
+  "gradient" : {
+    "type": "LINEAR",
+    "angle": "0",
+    "length": "100",
+    "startPoint": {
+      "x": "0",
+      "y": "0"
+    },
+    "colors": [
+      {
+        "color": "#ffffff",
+        "position": "0.1"
+      },
+      {
+        "color": "#000000",
+        "position": "0.2"
+      }
+    ]
+  },
+  "fillType": "REPEAT",
+  "texture": {
+    "width": "200",
+    "height": "150",
+    "resource": "drawable_image"
+  },
+  "roundedCorners": "30",
+  "glow": {
+    "type": "NORMAL",
+    "radius": "10"
+  },
+  "emboss": {
+    "type": "NORMAL",
+    "angle": "0"
+  },
+  "shadow": {
+    "radius": "10",
+    "offset": {
+      "x": "0",
+      "y": "10"
+    },
+    "color": "#000000"
+  }
+}
