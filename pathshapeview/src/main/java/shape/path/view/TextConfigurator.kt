@@ -1,7 +1,10 @@
 package shape.path.view
 
+import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
+import org.json.JSONObject
+import shape.path.view.utils.JSONUtils
 
 /**
  * Created by root on 1/25/18.
@@ -15,7 +18,43 @@ class TextConfigurator {
         UNDERLINE,
         STRIKE,
         SUB_PIXEL,
-        ITALIC
+        ITALIC;
+
+        companion object {
+            fun fromString(type: String?): Style? {
+                if (type.isNullOrEmpty()) return null
+                Style.values().forEach {
+                    if (it.toString() == type) {
+                        return it
+                    }
+                }
+                return null
+            }
+        }
+    }
+
+    companion object {
+        internal fun fromJson(context:Context, json: JSONObject?):TextConfigurator? {
+            if (json == null) return null
+            val tc = TextConfigurator()
+            val stylesArr = json.optJSONArray("styles")
+            stylesArr?.let {
+                val styles: Array<Style?> = arrayOfNulls(stylesArr.length())
+                for (i in 0 until stylesArr.length()) {
+                    styles[i] = Style.fromString(stylesArr.optString(i))
+                }
+                tc.setStyle(*styles)
+            }
+            val offset = JSONUtils.jsonToPoint(json.optJSONObject("textOffset")) ?: PointF(0f, 0f)
+            val size = json.optDouble("size", 0.0).toFloat()
+            val color = json.optInt("color", 0)
+            val typeface = JSONUtils.jsonToTypeface(context, json)
+            tc.setTextOffset(offset)
+            tc.setTextSize(size)
+            tc.setTextColor(color)
+            tc.setTypeface(typeface)
+            return tc
+        }
     }
 
     init {
@@ -41,13 +80,14 @@ class TextConfigurator {
         textOffset = offset
     }
 
-    fun setStyle(vararg style: Style) {
+    fun setStyle(vararg style: Style?) {
         paint.isFakeBoldText = false
         paint.isUnderlineText = false
         paint.isStrikeThruText = false
         paint.isSubpixelText = false
         paint.textSkewX = 0f
         style.forEach {
+            if (it == null) return@forEach
             when(it) {
                 Style.BOLD -> paint.isFakeBoldText = true
                 Style.UNDERLINE -> paint.isUnderlineText = true

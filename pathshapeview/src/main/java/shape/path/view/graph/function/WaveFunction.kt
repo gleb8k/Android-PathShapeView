@@ -45,8 +45,20 @@ class WaveFunction(var waveWidth: Float, var waveHeight: Float, var waveType: Wa
             }
         };
 
-
         internal abstract fun getFunction(waveWidth: Float, waveHeight: Float, xValue: Float, stepValue: Float): Float
+
+        companion object {
+
+            fun fromString(type: String?): WaveType? {
+                if (type.isNullOrEmpty()) return null
+                WaveType.values().forEach {
+                    if (it.toString() == type) {
+                        return it
+                    }
+                }
+                return null
+            }
+        }
     }
 
     init {

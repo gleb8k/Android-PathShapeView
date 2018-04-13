@@ -14,11 +14,11 @@ class SampleAdapter(val itemClickListener: SampleItemHolder.OnItemClickListener)
         return items.size
     }
 
-    override fun onBindViewHolder(holder: SampleItemHolder?, position: Int) {
-        holder?.bind(items[position])
+    override fun onBindViewHolder(holder: SampleItemHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SampleItemHolder {
-        return SampleItemHolder.newInstance(parent!!, itemClickListener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleItemHolder {
+        return SampleItemHolder.newInstance(parent, itemClickListener)
     }
 }

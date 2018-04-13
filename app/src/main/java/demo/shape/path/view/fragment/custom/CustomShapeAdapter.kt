@@ -51,11 +51,11 @@ class CustomShapeAdapter(var context: Context): RecyclerView.Adapter<CustomShape
         return items.size
     }
 
-    override fun onBindViewHolder(holder: CustomShapeItemHolder?, position: Int) {
-        holder?.bind(items[position])
+    override fun onBindViewHolder(holder: CustomShapeItemHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomShapeItemHolder {
-        return CustomShapeItemHolder.newInstance(parent!!)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomShapeItemHolder {
+        return CustomShapeItemHolder.newInstance(parent)
     }
 }

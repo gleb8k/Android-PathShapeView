@@ -1,7 +1,6 @@
 package shape.path.view.point.converter
 
 import android.graphics.Matrix
-import android.graphics.PointF
 
 /**
  * Created by root on 1/9/18.
@@ -17,12 +16,6 @@ class CoordinateConverter(var originScreenW: Float, var originScreenH: Float) : 
         screenScaleFactorY = screenHeight / originScreenH
         matrix.setScale(screenScaleFactorX, screenScaleFactorY)
     }
-
-    /*override fun convertPoint(originPoint: PointF): PointF {
-        val x = originPoint.x * screenScaleFactorX
-        val y = originPoint.y * screenScaleFactorY
-        return PointF(x, y)
-    }*/
 
     override fun getMatrix(): Matrix {
         return matrix

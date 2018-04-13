@@ -27,8 +27,10 @@ class ShapeManager {
             Sample.MARKS_SAMPLE -> return getMarksSamples()
             Sample.TEXT_SAMPLE -> return getTextPathSamples()
             Sample.FILL_WITH_EFFECTS_SAMPLE -> return getSampleEffects()
+            else -> {
+                return arrayListOf()
+            }
         }
-        return arrayListOf()
     }
 
     private fun getSampleShapes(): List<PathShape> {

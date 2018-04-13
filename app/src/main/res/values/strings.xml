@@ -11,6 +11,7 @@
     <string name="sample_text">Text path sample</string>
     <string name="sample_fill_with_effects">Fill shapes effect sample</string>
     <string name="sample_custom_shape_list">Custom shape list sample</string>
+    <string name="sample_json_parser">JSON parser sample</string>
 
     <string name="custom_shape_item_title">Item %s</string>
 </resources>

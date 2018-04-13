@@ -1,0 +1,261 @@
+{
+  "fillBody":{
+    "color":"#000000",
+    "fillType": "MIRROR",
+    "texture": {
+      "width": "300",
+      "height": "300",
+      "resource": "bridge"
+    },
+    "gradient": {
+      "type": "LINEAR",
+      "angle": "0",
+      "length": "300",
+      "startPoint": {
+        "x": "0",
+        "y": "0"
+      },
+      "colors": [
+        {
+          "color": "#ffffff",
+          "position": "0"
+        },
+        {
+          "color": "#000000",
+          "position": "1"
+        }
+      ]
+    },
+    "roundedCorners": "30",
+    "glow": {
+      "type": "NORMAL",
+      "radius": "10"
+    },
+    "emboss": {
+      "type": "NORMAL",
+      "angle": "0"
+    },
+    "shadow": {
+      "radius": "10",
+      "offset": {
+        "x": "0",
+        "y": "10"
+      },
+      "color": "#000000"
+    }
+  },
+  "fillContour":{
+    "color":"#000000",
+    "roundedCorners": "30",
+    "width": "20",
+    "isDotRounded": "true",
+    "dotParams": [
+      {
+        "length": "10",
+        "distance": "15"
+      },
+      {
+        "length": "15",
+        "distance": "15"
+      }
+    ]
+  },
+  "pathProvider": {
+    "shapes":[
+      {
+        "shapeType": "LINES",
+        "pathOperation": "ADD",
+        "lines": [
+          {
+            "x": "0",
+            "y": "0"
+          },
+          {
+            "x": "1",
+            "y": "0"
+          }
+        ],
+        "isClosed": "false"
+      },
+      {
+        "shapeType": "ARC",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "width": "0.8",
+        "height": "0.5",
+        "startAngle": "30",
+        "sweepAngle": "60"
+      },
+      {
+        "shapeType": "OVAL",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "width": "0.4",
+        "height": "0.5"
+      },
+      {
+        "shapeType": "CIRCLE",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "radius": "0.4"
+      },
+      {
+        "shapeType": "POLY",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "radius": "0.3",
+        "angleRotation":"45",
+        "sidesCount": "5"
+      },
+      {
+        "shapeType": "STAR",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "innerRadius": "0.2",
+        "outerRadius": "0.5",
+        "angleRotation":"30",
+        "sidesCount": "9"
+      },
+      {
+        "shapeType": "RECT",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "width": "0.3",
+        "height": "0.4"
+      },
+      {
+        "shapeType": "ROUND_RECT",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "width": "0.3",
+        "height": "0.4",
+        "cornerRadius": "10"
+      },
+      {
+        "shapeType": "TEXT",
+        "pathOperation": "ADD",
+        "centerPoint": {
+          "x": "0.5",
+          "y": "0.5"
+        },
+        "width": "0.5",
+        "height": "0.2",
+        "text": "Hello!",
+        "textConfigurator": {
+          "styles": [
+            "BOLD",
+            "ITALIC"
+          ],
+          "textOffset": {
+            "x": "5",
+            "y": "10"
+          },
+          "size":"10",
+          "color":"#787878",
+          "typefaceAsset":"fonts/PoorStory-Regular.ttf"
+        }
+      },
+      {
+        "shapeType": "CUSTOM_SHAPE",
+        "pathOperation": "ADD",
+        "lines": [
+          {
+            "x":"0.2",
+            "y":"0.1"
+          },
+          {
+            "type":"SINE",
+            "waveWidth":"0.1",
+            "waveHeight":"0.05",
+            "offset": {
+              "x":"0",
+              "y":"0.1"
+            },
+            "skew": {
+              "x":"0",
+              "y":"0"
+            },
+            "rotate":"0",
+            "minPoint": {
+              "x":"0.2",
+              "y":"-1"
+            },
+            "maxPoint": {
+              "x":"0.8",
+              "y":"1"
+            },
+            "stepCount":"200"
+          }
+        ],
+        "isClosed": "true"
+      }
+    ]
+  },
+  "pointConverter": {
+    "type":"PERCENTAGE"
+  },
+  "marks":[
+    {
+      "id":"0",
+      "drawable": {
+        "width": "100",
+        "height": "100",
+        "resource": "mark",
+        "selectedResource": "mark_selected"
+      },
+      "touchBounds": {
+        "width":"100",
+        "height":"100"
+      },
+      "checkable":"true",
+      "multiSelectionMode":"true",
+      "textConfigurator": {
+        "styles": [
+          "BOLD",
+          "ITALIC"
+        ],
+        "textOffset": {
+          "x": "5",
+          "y": "10"
+        },
+        "size":"10",
+        "color":"#787878",
+        "typefaceAsset":"fonts/PoorStory-Regular.ttf"
+      },
+      "items":[
+        {
+          "x":"0.35",
+          "y":"0.3",
+          "label":"Item_1"
+        },
+        {
+          "x":"0.65",
+          "y":"0.3",
+          "label":"Item_2"
+        }
+      ]
+    }
+  ]
+
+}

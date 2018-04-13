@@ -82,7 +82,7 @@ class CustomShapeListFragment : Fragment() {
                 .fillBody(body)
                 .fillContour(contour)
                 .setPointConverter(PercentagePointConverter()))
-        appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+        appbar.addOnOffsetChangedListener { _, verticalOffset ->
             val kx = 1f + (verticalOffset.toFloat() / appbar.totalScrollRange.toFloat())
             Log.d("scale factor","kx = " + kx)
             ava.scaleX = kx

@@ -13,10 +13,8 @@ import shape.path.view.point.converter.PointConverter
  * Created by root on 1/9/18.
  */
 class PathProvider {
-    internal val path: Path = Path()
-    internal var contourPath: Path? = null
-
-    private var isBuilt = false
+    private val path: Path = Path()
+    internal var shapePath: Path? = null
 
     enum class PathOperation {
         ADD,
@@ -24,7 +22,19 @@ class PathProvider {
         SUB_REVERSE,
         JOIN,
         INTERSECT,
-        XOR
+        XOR;
+
+        companion object {
+            fun fromString(type: String?): PathOperation? {
+                if (type.isNullOrEmpty()) return null
+                PathOperation.values().forEach {
+                    if (it.toString() == type) {
+                        return it
+                    }
+                }
+                return null
+            }
+        }
     }
 
     fun putLines(list: List<PointF>, isClosed:Boolean, operation: PathOperation) {
@@ -166,8 +176,7 @@ class PathProvider {
 
     fun reset() {
         path.reset()
-        contourPath?.reset()
-        isBuilt = false
+        shapePath = null
     }
 
     private fun putPath(p: Path, operation: PathOperation) {
@@ -186,31 +195,26 @@ class PathProvider {
     }
 
     internal fun build(converter: PointConverter, contourWidth: Float) {
-        if (!isBuilt) {
-            val m = converter.getMatrix()
-            if (!m.isIdentity) {
-                path.transform(m)
-            }
-            fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
-            isBuilt = true
+        val m = converter.getMatrix()
+        shapePath = Path(path)
+        if (!m.isIdentity) {
+            shapePath!!.transform(m)
         }
-
+        fitContourPath(converter.screenWidth, converter.screenHeight, contourWidth)
     }
 
     private fun fitContourPath(screenWidth: Float, screenHeight: Float, contourWidth: Float) {
         if (contourWidth >= 0f) {
-            contourPath = Path(path)
             val d = contourWidth / 2
             val r1 = RectF(0f, 0f, screenWidth, screenHeight)
             val r2 = RectF(d, d, screenWidth - d, screenHeight - d)
             val matrix = Matrix()
             matrix.setRectToRect(r1, r2, Matrix.ScaleToFit.FILL)
-            contourPath?.transform(matrix)
-            path.transform(matrix)
+            shapePath?.transform(matrix)
         }
     }
 
-    internal fun hasContourPath(): Boolean {
-        return contourPath != null
+    internal fun hasPath(): Boolean {
+        return shapePath != null
     }
 }

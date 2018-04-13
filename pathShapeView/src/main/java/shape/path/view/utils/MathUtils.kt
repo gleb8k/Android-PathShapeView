@@ -6,7 +6,7 @@ import android.graphics.RectF
 /**
  * Created by Gleb on 1/3/18.
  */
-class Utils {
+class MathUtils {
 
     companion object {
 

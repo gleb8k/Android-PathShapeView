@@ -3,12 +3,12 @@ package shape.path.view.mark
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.PointF
-import android.graphics.RectF
 import android.graphics.drawable.Drawable
-import android.support.v4.content.res.ResourcesCompat
-import shape.path.view.utils.DrawableUtils
+import org.json.JSONObject
 import shape.path.view.TextConfigurator
 import shape.path.view.point.converter.PointConverter
+import shape.path.view.utils.DrawableUtils
+import shape.path.view.utils.JSONUtils
 
 /**
  * Created by root on 1/25/18.
@@ -32,6 +32,44 @@ class Mark {
 
     private var itemsChanged = false
     private var drawableChanged = false
+
+    companion object {
+
+        internal fun fromJson(context: Context, json: JSONObject?): Mark? {
+            if (json == null) return null
+            val mark = Mark()
+            mark.setId(json.optInt("id", 0))
+            val drawable = json.optJSONObject("drawable")
+            drawable?.let {
+                val w = drawable.optDouble("width", 0.0).toFloat()
+                val h = drawable.optDouble("height", 0.0).toFloat()
+                mark.setDrawable(JSONUtils.stringToDrawableResId(context, drawable.optString("resource")))
+                mark.setSelectedDrawable(JSONUtils.stringToDrawableResId(context, drawable.optString("selectedResource")))
+                mark.fitDrawableToSize(w, h)
+            }
+            val touchBounds = json.optJSONObject("touchBounds")
+            touchBounds?.let {
+                val w = touchBounds.optDouble("width", 0.0).toFloat()
+                val h = touchBounds.optDouble("height", 0.0).toFloat()
+                mark.setTouchBounds(w, h)
+            }
+            mark.setCheckable(json.optBoolean("checkable", false))
+            mark.setMultiSelectionModeEnabled(json.optBoolean("multiSelectionMode", false))
+            mark.setTextConfigurator(TextConfigurator.fromJson(context, json.optJSONObject("textConfigurator")))
+            val items = json.optJSONArray("items")
+            items?.let {
+                for(i in 0 until it.length()) {
+                    val item = it.optJSONObject(i)
+                    item?.let {
+                        val p = JSONUtils.jsonToPoint(item, PointF(0f, 0f))
+                        val label = item.optString("label")
+                        mark.addPosition(p!!, label)
+                    }
+                }
+            }
+            return mark
+        }
+    }
 
     fun addPosition(point: PointF) {
         this.addPosition(point, null)
@@ -66,7 +104,7 @@ class Mark {
         itemsChanged = true
     }
 
-    fun setTextConfigurator(configurator: TextConfigurator) {
+    fun setTextConfigurator(configurator: TextConfigurator?) {
         this.textConfigurator = configurator
     }
 

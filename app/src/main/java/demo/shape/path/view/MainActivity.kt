@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import demo.shape.path.view.fragment.JsonParserFragment
 import demo.shape.path.view.fragment.custom.CustomShapeListFragment
 import demo.shape.path.view.fragment.ShapeFragment
 import demo.shape.path.view.samples.Sample
@@ -25,15 +26,22 @@ class MainActivity : AppCompatActivity(), SampleItemHolder.OnItemClickListener {
     }
 
     override fun onItemClick(sample: Sample) {
-        var tag = ""
-        if (sample == Sample.CUSTOM_SHAPE_LIST_SAMPLE) {
-            fragment = CustomShapeListFragment.newInstance()
-            tag = CustomShapeListFragment::javaClass.name
+        var tag: String
+        when (sample) {
+            Sample.CUSTOM_SHAPE_LIST_SAMPLE -> {
+                fragment = CustomShapeListFragment.newInstance()
+                tag = CustomShapeListFragment::javaClass.name
+            }
+            Sample.JSON_PARSER_SAMPLE -> {
+                fragment = JsonParserFragment.newInstance()
+                tag = JsonParserFragment::javaClass.name
+            }
+            else -> {
+                fragment = ShapeFragment.newInstance(sample)
+                tag = ShapeFragment::javaClass.name
+            }
         }
-        else {
-            fragment = ShapeFragment.newInstance(sample)
-            tag = ShapeFragment::javaClass.name
-        }
+
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.container, fragment)
         fragmentTransaction.addToBackStack(tag)
