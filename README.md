@@ -25,7 +25,7 @@ Then add the dependencies that you need in your project.
 
 ```gradle
 dependencies {
-	compile 'com.github.gleb8k:Android-PathShapeView:1.2.0'
+	compile 'com.github.gleb8k:Android-PathShapeView:1.3.2'
 }
 ```
 ## Usage
@@ -47,9 +47,27 @@ Or inflate from xml:
 Use *PathShape* class to config graphic items 
 ```kotlin
 	val pathShape = PathShape.create()
+	...
+	//or load from .json
+	val pathShape = PathShape.fromAsset(context, fileName)
+	...
 	pathShapeView.setPath(pathShape)
 	...
 ```
+Or add *assetShapeResource* attribute to PathShapeView in xml
+```xml
+	...
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	...
+	<shape.path.view.PathShapeView
+            android:id="@+id/path"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+	    app:assetShapeResource="pathShape.json">
+	    ...
+```
+Here is a [sample of file format in json](https://github.com/gleb8k/Android-PathShapeView/blob/master/app/src/main/assets/pathShape.json)
+
 * **PathProvider** - is the main class which allow to create different graphic items. Each item can be added with the logical operation (**PathOperation**: ADD, SUB, SUB_REVERSE, JOIN, INTERSECT, XOR)  
 Just to simple add item use **ADD** operation.
 There are several items which you can create:
